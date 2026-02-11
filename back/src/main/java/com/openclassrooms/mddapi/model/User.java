@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,31 +17,39 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * Represents a programming topic/theme in the MDD social network. Users can subscribe to topics to
- * see related articles in their feed.
+ * User entity representing a registered user in the system.
  */
 @Entity
-@Table(name = "topic")
+@Table(name = "user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Topic {
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, unique = true, length = 100)
-  private String name;
+  @Column(unique = true, nullable = false, length = 50)
+  @NotBlank
+  @Size(max = 50)
+  private String username;
 
-  @Column(columnDefinition = "TEXT")
-  private String description;
+  @Column(unique = true, nullable = false)
+  @NotBlank
+  @Email
+  @Size(max = 255)
+  private String email;
+
+  @Column(nullable = false)
+  @NotBlank
+  private String password;
 
   @CreationTimestamp
-  @Column(name = "created_at", nullable = false, updatable = false)
+  @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
 
   @UpdateTimestamp
-  @Column(name = "updated_at", nullable = false)
+  @Column(nullable = false)
   private LocalDateTime updatedAt;
 }
