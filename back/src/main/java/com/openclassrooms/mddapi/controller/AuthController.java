@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +49,8 @@ public class AuthController {
 
     // Get user details
     User user = userService.findByUsername(authentication.getName())
-        .orElseThrow(() -> new RuntimeException("User not found"));
+        .orElseThrow(
+            () -> new UsernameNotFoundException("User not found: " + authentication.getName()));
 
     // Generate JWT token
     String token = jwtUtil.generateToken(user.getUsername());
