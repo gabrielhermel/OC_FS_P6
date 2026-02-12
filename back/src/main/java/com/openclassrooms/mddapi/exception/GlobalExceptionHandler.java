@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.exception;
 
+import com.openclassrooms.mddapi.dto.response.ErrorResponse;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class GlobalExceptionHandler {
 
     ErrorResponse response = new ErrorResponse(
         HttpStatus.BAD_REQUEST.value(),
-        "Validation failed",
+        "Échec de la validation",
         errors,
         LocalDateTime.now()
     );
@@ -53,7 +54,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponse> handleBadCredentials(BadCredentialsException ex) {
     ErrorResponse response = new ErrorResponse(
         HttpStatus.UNAUTHORIZED.value(),
-        "Invalid username or password",
+        "Nom d'utilisateur ou mot de passe incorrect",
         null,
         LocalDateTime.now()
     );
@@ -72,12 +73,30 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponse> handleUserNotFound(UsernameNotFoundException ex) {
     ErrorResponse response = new ErrorResponse(
         HttpStatus.UNAUTHORIZED.value(),
-        "Invalid username or password", // Generic message
+        "Nom d'utilisateur ou mot de passe incorrect", // Generic message
         null,
         LocalDateTime.now()
     );
 
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+  }
+
+  /**
+   * Handles duplicate resource exceptions (e.g., duplicate username/email).
+   *
+   * @param ex duplicate resource exception
+   * @return error response
+   */
+  @ExceptionHandler(DuplicateResourceException.class)
+  public ResponseEntity<ErrorResponse> handleDuplicateResource(DuplicateResourceException ex) {
+    ErrorResponse response = new ErrorResponse(
+        HttpStatus.CONFLICT.value(),
+        ex.getMessage(),
+        null,
+        LocalDateTime.now()
+    );
+
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
   }
 
   /**
@@ -90,7 +109,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
     ErrorResponse response = new ErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR.value(),
-        "An unexpected error occurred",
+        "Une erreur inattendue s'est produite",
         null,
         LocalDateTime.now()
     );

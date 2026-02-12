@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.exception;
+package com.openclassrooms.mddapi.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.Map;

@@ -38,4 +38,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         new ArrayList<>()
     );
   }
+
+  /**
+   * Loads user by ID for JWT token validation.
+   *
+   * @param userId user ID
+   * @return UserDetails for Spring Security
+   * @throws UsernameNotFoundException if user not found
+   */
+  public UserDetails loadUserById(Long userId) throws UsernameNotFoundException {
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new UsernameNotFoundException("User not found: " + userId));
+
+    return new org.springframework.security.core.userdetails.User(
+        user.getUsername(),
+        user.getPassword(),
+        new ArrayList<>()
+    );
+  }
 }

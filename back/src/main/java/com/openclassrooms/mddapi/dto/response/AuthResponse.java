@@ -1,4 +1,6 @@
-package com.openclassrooms.mddapi.dto;
+package com.openclassrooms.mddapi.dto.response;
+
+import com.openclassrooms.mddapi.dto.model.UserDTO;
 
 /**
  * DTO for authentication responses containing JWT token.

@@ -1,14 +1,17 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.dto.AuthResponse;
-import com.openclassrooms.mddapi.dto.LoginRequest;
-import com.openclassrooms.mddapi.dto.UserDTO;
+import com.openclassrooms.mddapi.dto.model.UserDTO;
+import com.openclassrooms.mddapi.dto.request.LoginRequest;
+import com.openclassrooms.mddapi.dto.request.RegisterRequest;
+import com.openclassrooms.mddapi.dto.response.AuthResponse;
+import com.openclassrooms.mddapi.exception.DuplicateResourceException;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.security.JwtUtil;
 import com.openclassrooms.mddapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,10 +56,46 @@ public class AuthController {
             () -> new UsernameNotFoundException("User not found: " + authentication.getName()));
 
     // Generate JWT token
-    String token = jwtUtil.generateToken(user.getUsername());
+    String token = jwtUtil.generateToken(user.getId());
 
     // Convert to DTO and return
     UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
     return ResponseEntity.ok(new AuthResponse(token, userDTO));
+  }
+
+  /**
+   * Registers a new user.
+   *
+   * @param registerRequest registration details
+   * @return JWT token and user information
+   */
+  @PostMapping("/register")
+  public ResponseEntity<AuthResponse> register(
+      @Valid @RequestBody RegisterRequest registerRequest) {
+    // Check if username already exists
+    if (userService.existsByUsername(registerRequest.username())) {
+      throw new DuplicateResourceException("Ce nom d'utilisateur est déjà pris");
+    }
+
+    // Check if email already exists
+    if (userService.existsByEmail(registerRequest.email())) {
+      throw new DuplicateResourceException("Cet email est déjà utilisé");
+    }
+
+    // Create new user
+    User user = new User();
+    user.setUsername(registerRequest.username());
+    user.setEmail(registerRequest.email());
+    user.setPassword(registerRequest.password());
+
+    // Save user (password will be encrypted by UserService)
+    User savedUser = userService.registerUser(user);
+
+    // Generate JWT token
+    String token = jwtUtil.generateToken(savedUser.getId());
+
+    // Convert to DTO and return
+    UserDTO userDTO = UserMapper.INSTANCE.toDTO(savedUser);
+    return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, userDTO));
   }
 }

@@ -35,13 +35,13 @@ public class JwtUtil {
   }
 
   /**
-   * Extracts username from token.
+   * Extracts user ID from token.
    *
    * @param token JWT token
-   * @return username
+   * @return user ID
    */
-  public String extractUsername(String token) {
-    return extractClaim(token, Claims::getSubject);
+  public Long extractUserId(String token) {
+    return Long.parseLong(extractClaim(token, Claims::getSubject));
   }
 
   /**
@@ -91,21 +91,21 @@ public class JwtUtil {
   }
 
   /**
-   * Generates token for username.
+   * Generates token for user ID.
    *
-   * @param username username
+   * @param userId user ID
    * @return JWT token
    */
-  public String generateToken(String username) {
+  public String generateToken(Long userId) {
     Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, username);
+    return createToken(claims, userId.toString());
   }
 
   /**
    * Creates token with claims and subject.
    *
    * @param claims  additional claims
-   * @param subject token subject (username)
+   * @param subject token subject (user ID)
    * @return JWT token
    */
   private String createToken(Map<String, Object> claims, String subject) {
@@ -122,14 +122,14 @@ public class JwtUtil {
   }
 
   /**
-   * Validates token against username.
+   * Validates token against user ID.
    *
-   * @param token    JWT token
-   * @param username username to validate against
+   * @param token  JWT token
+   * @param userId user ID to validate against
    * @return true if valid
    */
-  public Boolean validateToken(String token, String username) {
-    final String extractedUsername = extractUsername(token);
-    return (extractedUsername.equals(username) && !isTokenExpired(token));
+  public Boolean validateToken(String token, Long userId) {
+    final Long extractedUserId = extractUserId(token);
+    return (extractedUserId.equals(userId) && !isTokenExpired(token));
   }
 }
