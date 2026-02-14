@@ -100,6 +100,24 @@ public class GlobalExceptionHandler {
   }
 
   /**
+   * Handles resource not found exceptions.
+   *
+   * @param ex resource not found exception
+   * @return error response
+   */
+  @ExceptionHandler(ResourceNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
+    ErrorResponse response = new ErrorResponse(
+        HttpStatus.NOT_FOUND.value(),
+        ex.getMessage(),
+        null,
+        LocalDateTime.now()
+    );
+
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+  }
+
+  /**
    * Handles all other unexpected exceptions.
    *
    * @param ex generic exception

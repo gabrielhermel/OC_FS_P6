@@ -4,15 +4,12 @@ import com.openclassrooms.mddapi.dto.model.UserDTO;
 import com.openclassrooms.mddapi.model.User;
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 /**
  * MapStruct mapper for converting between User entities and UserDTOs.
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
-
-  UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
   /**
    * Converts a User entity to a UserDTO.

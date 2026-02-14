@@ -33,6 +33,7 @@ public class AuthController {
   private final AuthenticationManager authenticationManager;
   private final UserService userService;
   private final JwtUtil jwtUtil;
+  private final UserMapper userMapper;
 
   /**
    * Authenticates user and returns JWT token.
@@ -59,7 +60,7 @@ public class AuthController {
     String token = jwtUtil.generateToken(user.getId());
 
     // Convert to DTO and return
-    UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
+    UserDTO userDTO = userMapper.toDTO(user);
     return ResponseEntity.ok(new AuthResponse(token, userDTO));
   }
 
@@ -95,7 +96,7 @@ public class AuthController {
     String token = jwtUtil.generateToken(savedUser.getId());
 
     // Convert to DTO and return
-    UserDTO userDTO = UserMapper.INSTANCE.toDTO(savedUser);
+    UserDTO userDTO = userMapper.toDTO(savedUser);
     return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, userDTO));
   }
 }

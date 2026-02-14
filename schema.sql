@@ -23,8 +23,6 @@ CREATE TABLE topic (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL UNIQUE,
   description TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX idx_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -60,12 +58,12 @@ CREATE TABLE comment (
 
 -- SUBSCRIPTION table
 CREATE TABLE subscription (
-  user_id BIGINT NOT NULL,
-  topic_id BIGINT NOT NULL,
-  subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (user_id, topic_id),
-  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
-  FOREIGN KEY (topic_id) REFERENCES topic(id) ON DELETE CASCADE,
-  INDEX idx_user (user_id),
-  INDEX idx_topic (topic_id)
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    topic_id BIGINT NOT NULL,
+    UNIQUE KEY unique_user_topic (user_id, topic_id),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (topic_id) REFERENCES topic(id) ON DELETE CASCADE,
+    INDEX idx_user (user_id),
+    INDEX idx_topic (topic_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
