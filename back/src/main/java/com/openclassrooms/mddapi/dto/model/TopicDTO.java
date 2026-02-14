@@ -6,7 +6,8 @@ package com.openclassrooms.mddapi.dto.model;
 public record TopicDTO(
     Long id,
     String name,
-    String description
+    String description,
+    Boolean subscribed
 ) {
 
 }

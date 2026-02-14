@@ -8,6 +8,8 @@ import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,5 +74,18 @@ public class SubscriptionService {
    */
   public List<Subscription> getUserSubscriptions(Long userId) {
     return subscriptionRepository.findByUserId(userId);
+  }
+
+  /**
+   * Gets the set of topic IDs a user is subscribed to.
+   *
+   * @param userId user ID
+   * @return set of subscribed topic IDs
+   */
+  public Set<Long> getSubscribedTopicIds(Long userId) {
+    return subscriptionRepository.findByUserId(userId)
+        .stream()
+        .map(subscription -> subscription.getTopic().getId())
+        .collect(Collectors.toSet());
   }
 }
