@@ -3,21 +3,17 @@ package com.openclassrooms.mddapi.dto.request;
 import com.openclassrooms.mddapi.validation.UserConstraints.ValidEmail;
 import com.openclassrooms.mddapi.validation.UserConstraints.ValidPassword;
 import com.openclassrooms.mddapi.validation.UserConstraints.ValidUsername;
-import jakarta.validation.constraints.NotBlank;
 
 /**
- * DTO for user registration requests.
+ * DTO for updating user profile. All fields are optional.
  */
-public record RegisterRequest(
-    @NotBlank(message = "Le nom d'utilisateur est requis")
+public record UpdateProfileRequest(
     @ValidUsername
     String username,
 
-    @NotBlank(message = "L'email est requis")
     @ValidEmail
     String email,
 
-    @NotBlank(message = "Le mot de passe est requis")
     @ValidPassword
     String password
 ) {

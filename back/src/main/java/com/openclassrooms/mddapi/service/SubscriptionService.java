@@ -77,6 +77,17 @@ public class SubscriptionService {
   }
 
   /**
+   * Gets all subscriptions for a user with topics eagerly loaded. Use this when you need full topic
+   * details (not just Topic ID).
+   *
+   * @param userId user ID
+   * @return list of subscriptions with topics loaded
+   */
+  public List<Subscription> getUserSubscriptionsWithTopics(Long userId) {
+    return subscriptionRepository.findByUserIdWithTopics(userId);
+  }
+
+  /**
    * Gets the set of topic IDs a user is subscribed to.
    *
    * @param userId user ID
