@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.dto.request.UpdateProfileRequest;
 import com.openclassrooms.mddapi.dto.response.UserProfileResponse;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.security.SecurityUtils;
 import com.openclassrooms.mddapi.service.UserService;
 import com.openclassrooms.mddapi.service.UserService.UpdateResult;
 import jakarta.validation.Valid;
@@ -36,7 +37,7 @@ public class UserController {
    */
   @GetMapping("/profile")
   public ResponseEntity<UserProfileResponse> getProfile(Authentication authentication) {
-    Long userId = Long.parseLong(authentication.getName());
+    Long userId = SecurityUtils.getUserId(authentication);
     User user = userService.findById(userId)
         .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
 
@@ -55,7 +56,7 @@ public class UserController {
       @Valid @RequestBody UpdateProfileRequest request,
       Authentication authentication
   ) {
-    Long userId = Long.parseLong(authentication.getName());
+    Long userId = SecurityUtils.getUserId(authentication);
 
     UpdateResult result = userService.updateProfile(
         userId,

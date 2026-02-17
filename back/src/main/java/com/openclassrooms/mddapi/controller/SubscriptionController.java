@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
+import com.openclassrooms.mddapi.security.SecurityUtils;
 import com.openclassrooms.mddapi.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class SubscriptionController {
       @PathVariable Long topicId,
       Authentication authentication
   ) {
-    Long userId = Long.parseLong(authentication.getName());
+    Long userId = SecurityUtils.getUserId(authentication);
     boolean created = subscriptionService.subscribe(userId, topicId);
 
     return created
@@ -53,7 +54,7 @@ public class SubscriptionController {
       @PathVariable Long topicId,
       Authentication authentication
   ) {
-    Long userId = Long.parseLong(authentication.getName());
+    Long userId = SecurityUtils.getUserId(authentication);
     subscriptionService.unsubscribe(userId, topicId);
 
     return ResponseEntity.noContent().build();

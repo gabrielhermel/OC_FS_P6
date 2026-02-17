@@ -34,13 +34,11 @@ public class SubscriptionService {
    */
   @Transactional
   public boolean subscribe(Long userId, Long topicId) {
-    // Validate user and topic exist
     User user = userRepository.findById(userId)
         .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
     Topic topic = topicRepository.findById(topicId)
         .orElseThrow(() -> new ResourceNotFoundException("Thème non trouvé"));
 
-    // Check if already subscribed
     if (subscriptionRepository.existsByUserIdAndTopicId(userId, topicId)) {
       return false;
     }

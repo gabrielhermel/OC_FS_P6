@@ -43,7 +43,6 @@ public class AuthController {
    */
   @PostMapping("/login")
   public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-    // Authenticate user
     Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             loginRequest.usernameOrEmail(),
@@ -51,15 +50,12 @@ public class AuthController {
         )
     );
 
-    // Get user details
     User user = userService.findByUsername(authentication.getName())
         .orElseThrow(
             () -> new UsernameNotFoundException("User not found: " + authentication.getName()));
 
-    // Generate JWT token
     String token = jwtUtil.generateToken(user.getId());
 
-    // Convert to DTO and return
     UserDTO userDTO = userMapper.toDTO(user);
     return ResponseEntity.ok(new AuthResponse(token, userDTO));
   }
@@ -73,17 +69,14 @@ public class AuthController {
   @PostMapping("/register")
   public ResponseEntity<AuthResponse> register(
       @Valid @RequestBody RegisterRequest registerRequest) {
-    // Check if username already exists
     if (userService.existsByUsername(registerRequest.username())) {
       throw new DuplicateResourceException("Ce nom d'utilisateur est déjà pris");
     }
 
-    // Check if email already exists
     if (userService.existsByEmail(registerRequest.email())) {
       throw new DuplicateResourceException("Cet email est déjà utilisé");
     }
 
-    // Create new user
     User user = new User();
     user.setUsername(registerRequest.username());
     user.setEmail(registerRequest.email());
@@ -92,10 +85,8 @@ public class AuthController {
     // Save user (password will be encrypted by UserService)
     User savedUser = userService.registerUser(user);
 
-    // Generate JWT token
     String token = jwtUtil.generateToken(savedUser.getId());
 
-    // Convert to DTO and return
     UserDTO userDTO = userMapper.toDTO(savedUser);
     return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token, userDTO));
   }

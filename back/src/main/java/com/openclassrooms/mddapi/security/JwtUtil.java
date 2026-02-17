@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
@@ -39,9 +40,14 @@ public class JwtUtil {
    *
    * @param token JWT token
    * @return user ID
+   * @throws JwtException if token subject is not a valid user ID
    */
   public Long extractUserId(String token) {
-    return Long.parseLong(extractClaim(token, Claims::getSubject));
+    try {
+      return Long.parseLong(extractClaim(token, Claims::getSubject));
+    } catch (NumberFormatException e) {
+      throw new JwtException("Invalid token subject");
+    }
   }
 
   /**

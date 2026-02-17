@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.security;
 
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,10 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,8 +24,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+  private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
   private final JwtUtil jwtUtil;
-  private final UserDetailsService userDetailsService;
+  private final MddUserDetailsService userDetailsService;
 
   /**
    * Filters each HTTP request to extract and validate JWT tokens. Extracts the JWT from the
@@ -48,24 +51,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     Long userId = null;
     String jwt = null;
 
-    // Extract JWT from Authorization header
     if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
       jwt = authorizationHeader.substring(7);
-      userId = jwtUtil.extractUserId(jwt);
+      try {
+        userId = jwtUtil.extractUserId(jwt);
+      } catch (JwtException e) {
+        // Log warning and continue filter chain.
+        // Spring Security will handle the unauthorized access for secured endpoints.
+        logger.warn("Invalid JWT token: {}", e.getMessage());
+        filterChain.doFilter(request, response);
+        return;
+      }
     }
 
-    // Validate token and set authentication
     if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      UserDetails userDetails = ((UserDetailsServiceImpl) userDetailsService).loadUserById(userId);
+      try {
+        UserDetails userDetails = userDetailsService.loadUserById(userId);
 
-      if (jwtUtil.validateToken(jwt, userId)) {
-        UsernamePasswordAuthenticationToken authToken =
-            new UsernamePasswordAuthenticationToken(
-                userDetails,
-                null,
-                userDetails.getAuthorities()
-            );
-        SecurityContextHolder.getContext().setAuthentication(authToken);
+        if (jwtUtil.validateToken(jwt, userId)) {
+          UsernamePasswordAuthenticationToken authToken =
+              new UsernamePasswordAuthenticationToken(
+                  userDetails,
+                  null,
+                  userDetails.getAuthorities()
+              );
+          SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+      } catch (Exception e) {
+        // Clear security context and continue filter chain.
+        // Spring Security will handle the unauthorized access for secured endpoints.
+        logger.warn("Could not authenticate user: {}", e.getMessage());
+        SecurityContextHolder.clearContext();
       }
     }
 

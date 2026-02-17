@@ -5,22 +5,22 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * Implementation of Spring Security's UserDetailsService. Loads user details from the database for
- * authentication.
+ * JPA-backed implementation of MddUserDetailsService. Loads user details from the database for
+ * Spring Security authentication.
  */
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class JpaUserDetailsService implements MddUserDetailsService {
 
   private final UserRepository userRepository;
 
   /**
-   * Loads user by username (or email). Tries to find by username first, then by email.
+   * Loads user by username or email for login authentication. Tries username first, then falls back
+   * to email.
    *
    * @param usernameOrEmail username or email
    * @return UserDetails for Spring Security

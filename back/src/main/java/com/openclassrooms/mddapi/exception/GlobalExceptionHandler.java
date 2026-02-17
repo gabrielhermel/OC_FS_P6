@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.exception;
 
 import com.openclassrooms.mddapi.dto.response.ErrorResponse;
+import io.jsonwebtoken.JwtException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -115,6 +116,23 @@ public class GlobalExceptionHandler {
     );
 
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+  }
+
+  /**
+   * Handles JWT exceptions (malformed or invalid tokens).
+   *
+   * @param ex JWT exception
+   * @return error response
+   */
+  @ExceptionHandler(JwtException.class)
+  public ResponseEntity<ErrorResponse> handleJwtException(JwtException ex) {
+    ErrorResponse response = new ErrorResponse(
+        HttpStatus.UNAUTHORIZED.value(),
+        "Token non valide ou expiré",
+        null,
+        LocalDateTime.now()
+    );
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
   }
 
   /**

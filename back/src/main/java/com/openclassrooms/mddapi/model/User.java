@@ -31,18 +31,12 @@ public class User {
   private Long id;
 
   @Column(unique = true, nullable = false, length = 50)
-  @NotBlank
-  @Size(max = 50)
   private String username;
 
   @Column(unique = true, nullable = false)
-  @NotBlank
-  @Email
-  @Size(max = 255)
   private String email;
 
   @Column(nullable = false)
-  @NotBlank
   private String password;
 
   @CreationTimestamp

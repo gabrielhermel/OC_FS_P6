@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.assembler.TopicAssembler;
 import com.openclassrooms.mddapi.dto.model.TopicDTO;
+import com.openclassrooms.mddapi.security.SecurityUtils;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class TopicController {
    */
   @GetMapping
   public ResponseEntity<List<TopicDTO>> getAllTopics(Authentication authentication) {
-    Long userId = Long.parseLong(authentication.getName());
+    Long userId = SecurityUtils.getUserId(authentication);
     return ResponseEntity.ok(topicAssembler.assembleTopicsForUser(userId));
   }
 }
