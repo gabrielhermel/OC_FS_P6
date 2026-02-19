@@ -25,9 +25,17 @@ public class UserService {
    *
    * @param user user to register
    * @return registered user
+   * @throws DuplicateResourceException if username or email is already taken
    */
   @Transactional
   public User registerUser(User user) {
+    if (userRepository.existsByUsername(user.getUsername())) {
+      throw new DuplicateResourceException("Ce nom d'utilisateur est déjà pris");
+    }
+    if (userRepository.existsByEmail(user.getEmail())) {
+      throw new DuplicateResourceException("Cet email est déjà pris");
+    }
+
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     return userRepository.save(user);
   }
@@ -63,6 +71,18 @@ public class UserService {
   }
 
   /**
+   * Gets user by ID (as opposed to findById() which returns Optional).
+   *
+   * @param id user ID
+   * @return user
+   * @throws ResourceNotFoundException if user not found
+   */
+  public User getById(Long id) {
+    return userRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
+  }
+
+  /**
    * Checks if email is already taken.
    *
    * @param email email to check
@@ -91,6 +111,8 @@ public class UserService {
    * @param email    new email (optional)
    * @param password new password (optional, will be encoded)
    * @return updated user and boolean indicating if changes were made
+   * @throws ResourceNotFoundException  if user not found
+   * @throws DuplicateResourceException if new username or email is already taken
    */
   @Transactional
   public UpdateResult updateProfile(Long userId, String username, String email, String password) {

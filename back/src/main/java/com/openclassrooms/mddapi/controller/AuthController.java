@@ -4,7 +4,6 @@ import com.openclassrooms.mddapi.dto.model.UserDTO;
 import com.openclassrooms.mddapi.dto.request.LoginRequest;
 import com.openclassrooms.mddapi.dto.request.RegisterRequest;
 import com.openclassrooms.mddapi.dto.response.AuthResponse;
-import com.openclassrooms.mddapi.exception.DuplicateResourceException;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.security.JwtUtil;
@@ -69,14 +68,6 @@ public class AuthController {
   @PostMapping("/register")
   public ResponseEntity<AuthResponse> register(
       @Valid @RequestBody RegisterRequest registerRequest) {
-    if (userService.existsByUsername(registerRequest.username())) {
-      throw new DuplicateResourceException("Ce nom d'utilisateur est déjà pris");
-    }
-
-    if (userService.existsByEmail(registerRequest.email())) {
-      throw new DuplicateResourceException("Cet email est déjà utilisé");
-    }
-
     User user = new User();
     user.setUsername(registerRequest.username());
     user.setEmail(registerRequest.email());

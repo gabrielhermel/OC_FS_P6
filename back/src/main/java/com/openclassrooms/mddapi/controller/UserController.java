@@ -3,7 +3,6 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.assembler.UserAssembler;
 import com.openclassrooms.mddapi.dto.request.UpdateProfileRequest;
 import com.openclassrooms.mddapi.dto.response.UserProfileResponse;
-import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.security.SecurityUtils;
 import com.openclassrooms.mddapi.service.UserService;
@@ -12,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,10 +36,10 @@ public class UserController {
    * @return user profile with subscription list
    */
   @GetMapping("/profile")
+  @Transactional(readOnly = true)
   public ResponseEntity<UserProfileResponse> getProfile(Authentication authentication) {
     Long userId = SecurityUtils.getUserId(authentication);
-    User user = userService.findById(userId)
-        .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
+    User user = userService.getById(userId);
 
     return ResponseEntity.ok(userAssembler.assembleUserProfile(user));
   }

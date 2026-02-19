@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,7 @@ public class TopicController {
    * @return list of all topics with subscription indicators
    */
   @GetMapping
+  @Transactional(readOnly = true)
   public ResponseEntity<List<TopicDTO>> getAllTopics(Authentication authentication) {
     Long userId = SecurityUtils.getUserId(authentication);
     return ResponseEntity.ok(topicAssembler.assembleTopicsForUser(userId));

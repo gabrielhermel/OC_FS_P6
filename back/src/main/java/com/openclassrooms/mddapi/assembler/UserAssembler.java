@@ -28,8 +28,7 @@ public class UserAssembler {
    * @return user profile response with subscription list
    */
   public UserProfileResponse assembleUserProfile(User user) {
-    List<Subscription> subscriptions = subscriptionService.getUserSubscriptionsWithTopics(
-        user.getId());
+    List<Subscription> subscriptions = subscriptionService.getUserSubscriptions(user.getId());
 
     List<TopicDTO> subscriptionDTOs = subscriptions.stream()
         .map(subscription -> topicMapper.toDTO(subscription.getTopic(), true))
