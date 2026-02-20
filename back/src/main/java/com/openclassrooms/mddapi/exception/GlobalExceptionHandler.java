@@ -143,6 +143,8 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
+    ex.printStackTrace();
+
     ErrorResponse response = new ErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR.value(),
         "Une erreur inattendue s'est produite",

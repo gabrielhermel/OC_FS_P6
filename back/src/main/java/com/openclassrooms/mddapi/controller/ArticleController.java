@@ -73,7 +73,6 @@ public class ArticleController {
    * @return created article details
    */
   @PostMapping
-  @Transactional(readOnly = true)
   public ResponseEntity<ArticleDetailResponse> createArticle(
       @Valid @RequestBody CreateArticleRequest request,
       Authentication authentication

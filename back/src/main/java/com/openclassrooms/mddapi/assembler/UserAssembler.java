@@ -9,6 +9,7 @@ import com.openclassrooms.mddapi.service.SubscriptionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Assembler for User-related DTOs. Combines data from multiple services to build presentation-ready
@@ -27,6 +28,7 @@ public class UserAssembler {
    * @param user the user entity
    * @return user profile response with subscription list
    */
+  @Transactional(readOnly = true)
   public UserProfileResponse assembleUserProfile(User user) {
     List<Subscription> subscriptions = subscriptionService.getUserSubscriptions(user.getId());
 

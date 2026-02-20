@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Assembler for Topic-related DTOs. Combines data from multiple services to build
@@ -28,6 +29,7 @@ public class TopicAssembler {
    * @param userId the ID of the current user
    * @return list of topics with subscription indicators
    */
+  @Transactional(readOnly = true)
   public List<TopicDTO> assembleTopicsForUser(Long userId) {
     List<Topic> topics = topicService.getAllTopics();
     Set<Long> subscribedTopicIds = subscriptionService.getSubscribedTopicIds(userId);
