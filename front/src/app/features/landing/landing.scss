@@ -9,7 +9,7 @@
 
 .logo {
   width: 70vw;
-  max-width: 695px;
+  max-width: variables.$logo-img-width;
   height: auto;
   position: absolute;
   top: 20vh;

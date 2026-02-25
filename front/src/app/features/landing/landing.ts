@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
-export class LandingComponent {
+export class Landing {
   constructor(private router: Router) {}
 
   navigateToLogin(): void {

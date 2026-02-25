@@ -7,4 +7,4 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.scss',
 })
-export class PublicLayoutComponent {}
+export class PublicLayout {}

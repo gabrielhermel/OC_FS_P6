@@ -1,0 +1,72 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <img src="/logo_p6.png" alt="MDD Logo" class="logo" />
+
+    @if (variant === 'secured') {
+      <div class="nav-links desktop-only">
+        <button mat-button color="warn" (click)="logout()" class="logout-btn">
+          Se déconnecter
+        </button>
+        <button mat-button routerLink="/articles" routerLinkActive="active" class="nav-btn">
+          Articles
+        </button>
+        <button mat-button routerLink="/themes" routerLinkActive="active" class="nav-btn">
+          Thèmes
+        </button>
+      </div>
+
+      <button
+        mat-icon-button
+        routerLink="/profile"
+        routerLinkActive="active"
+        class="user-avatar desktop-only"
+      >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="toggleMenu()" class="hamburger mobile-only">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="mobile-backdrop" [class.open]="menuOpen()" (click)="closeMenu()"></div>
+
+      <aside class="mobile-menu" [class.open]="menuOpen()">
+        <div class="mobile-menu-content">
+          <div class="mobile-nav-links">
+            <button mat-button color="warn" (click)="logout()" class="logout-btn">
+              Se déconnecter
+            </button>
+            <button
+              mat-button
+              routerLink="/articles"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              class="nav-btn"
+            >
+              Articles
+            </button>
+            <button
+              mat-button
+              routerLink="/themes"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              class="nav-btn"
+            >
+              Thèmes
+            </button>
+          </div>
+
+          <button
+            mat-icon-button
+            routerLink="/profile"
+            routerLinkActive="active"
+            (click)="closeMenu()"
+            class="user-avatar mobile-avatar"
+          >
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </div>
+      </aside>
+    }
+  </div>
+</nav>

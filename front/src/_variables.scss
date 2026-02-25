@@ -1,2 +1,20 @@
 // Breakpoints
 $breakpoint-tablet: 768px !default;
+
+// Logo
+$logo-img-width: 695px !default;
+
+// Navbar
+$navbar-padding-vertical: 1rem !default;
+$navbar-padding-horizontal: 2rem !default;
+$navbar-max-width: 1200px !default;
+$navbar-logo-height: 60px !default;
+$navbar-mobile-menu-width: 250px !default;
+
+// Spacing
+$button-gap: 1rem !default;
+$button-avatar-gap: 2rem !default;
+
+// Shadows & Overlays
+$mobile-menu-shadow: -2px 0 8px rgba(0, 0, 0, 0.15) !default;
+$mobile-backdrop-overlay: rgba(200, 200, 200, 0.5) !default;
