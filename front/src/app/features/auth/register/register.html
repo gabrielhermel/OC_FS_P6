@@ -10,10 +10,7 @@
         <label for="username">Nom d'utilisateur</label>
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <input matInput id="username" formControlName="username" required />
-          @if (
-            registerForm.get('username')?.hasError('required') &&
-            registerForm.get('username')?.touched
-          ) {
+          @if (username.hasError('required') && username.touched) {
             <mat-error>Le nom d'utilisateur est requis</mat-error>
           }
         </mat-form-field>
@@ -23,12 +20,10 @@
         <label for="email">Adresse e-mail</label>
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
           <input matInput type="email" id="email" formControlName="email" required />
-          @if (
-            registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
-          ) {
+          @if (email.hasError('required') && email.touched) {
             <mat-error>L'email est requis</mat-error>
           }
-          @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
+          @if (email.hasError('email') && email.touched) {
             <mat-error>L'email doit être valide</mat-error>
           }
         </mat-form-field>
@@ -45,6 +40,7 @@
             required
             [matTooltip]="passwordTooltip"
             matTooltipPosition="above"
+            matTooltipClass="password-requirements-tooltip"
             matTooltipTouchGestures="off"
             #tooltipRef="matTooltip"
             [matTooltipShowDelay]="1000000"
@@ -53,16 +49,12 @@
             (blur)="tooltipRef.hide(0)"
             (mousedown)="$event.stopPropagation()"
           />
-          @if (
-            registerForm.get('password')?.hasError('required') &&
-            registerForm.get('password')?.touched
-          ) {
+          @if (password.hasError('required') && password.touched) {
             <mat-error>Le mot de passe est requis</mat-error>
           }
           @if (
-            (registerForm.get('password')?.hasError('minlength') ||
-              registerForm.get('password')?.hasError('passwordStrength')) &&
-            registerForm.get('password')?.touched
+            (password.hasError('minlength') || password.hasError('passwordStrength')) &&
+            password.touched
           ) {
             <mat-error>Le mot de passe n'est pas valide</mat-error>
           }
