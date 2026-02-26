@@ -32,10 +32,10 @@ html {
       inverse-surface: #424242,
       inverse-on-surface: #ffffff,
 
-      primary: #673ab7,
+      primary: #7763c4,
       on-primary: #ffffff,
       primary-container: #ede7f6,
-      on-primary-container: #673ab7,
+      on-primary-container: #7763c4,
 
       tertiary: #ffd740,
       on-tertiary: rgba(0, 0, 0, 0.87),
@@ -70,8 +70,8 @@ html {
 
   @include mat.card-overrides(
     (
-      elevated-container-shape: 4px,
-      outlined-container-shape: 4px,
+      elevated-container-shape: 8px,
+      outlined-container-shape: 8px,
       elevated-container-color: #ffffff,
       outlined-container-color: #ffffff,
     )
@@ -92,15 +92,15 @@ html {
 
   @include mat.dialog-overrides(
     (
-      container-shape: 4px,
+      container-shape: 8px,
       container-color: #ffffff,
     )
   );
 
   @include mat.form-field-overrides(
     (
-      filled-container-shape: 4px,
-      outlined-container-shape: 4px,
+      filled-container-shape: 8px,
+      outlined-container-shape: 8px,
       filled-container-color: #f5f5f5,
       outlined-outline-color: rgba(0, 0, 0, 0.38),
       outlined-hover-outline-color: rgba(0, 0, 0, 0.87),
@@ -115,7 +115,7 @@ html {
 
   @include mat.menu-overrides(
     (
-      container-shape: 4px,
+      container-shape: 8px,
       container-color: #ffffff,
     )
   );
@@ -129,7 +129,7 @@ html {
 
   @include mat.snack-bar-overrides(
     (
-      container-shape: 4px,
+      container-shape: 8px,
       container-color: #424242,
       supporting-text-color: #ffffff,
     )
@@ -137,28 +137,28 @@ html {
 
   @include mat.autocomplete-overrides(
     (
-      container-shape: 4px,
+      container-shape: 8px,
       background-color: #ffffff,
     )
   );
 
   @include mat.bottom-sheet-overrides(
     (
-      container-shape: 4px,
+      container-shape: 8px,
       container-background-color: #ffffff,
     )
   );
 
   @include mat.datepicker-overrides(
     (
-      calendar-container-shape: 4px,
+      calendar-container-shape: 8px,
       calendar-container-background-color: #ffffff,
     )
   );
 
   @include mat.tooltip-overrides(
     (
-      container-shape: 4px,
+      container-shape: 8px,
       container-color: #424242,
       supporting-text-color: #ffffff,
     )
@@ -177,6 +177,15 @@ html {
       row-item-outline-color: rgba(0, 0, 0, 0.12),
     )
   );
+
+  @include mat.tooltip-overrides(
+    (
+      container-color: var(--mat-sys-surface-container),
+      container-shape: 8px,
+      supporting-text-color: var(--mat-sys-on-surface),
+      supporting-text-size: 0.875rem,
+    )
+  );
 }
 
 /* Global styles */
@@ -190,4 +199,13 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   background: #ffffff;
   color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-form-field {
+  --mat-form-field-container-height: 2.25rem;
+  --mat-form-field-container-vertical-padding: 0.5rem;
+}
+
+.mat-mdc-form-field-input-control {
+  caret-color: currentColor !important;
 }

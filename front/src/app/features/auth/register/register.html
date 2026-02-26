@@ -1,0 +1,82 @@
+<div class="register-container">
+  <button mat-icon-button class="back-button" (click)="navigateToLanding()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="register-card">
+    <h1 class="form-header">Inscription</h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <label for="username">Nom d'utilisateur</label>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input matInput id="username" formControlName="username" required />
+          @if (
+            registerForm.get('username')?.hasError('required') &&
+            registerForm.get('username')?.touched
+          ) {
+            <mat-error>Le nom d'utilisateur est requis</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Adresse e-mail</label>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input matInput type="email" id="email" formControlName="email" required />
+          @if (
+            registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
+          ) {
+            <mat-error>L'email est requis</mat-error>
+          }
+          @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
+            <mat-error>L'email doit être valide</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label for="password">Mot de passe</label>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input
+            matInput
+            type="password"
+            id="password"
+            formControlName="password"
+            required
+            [matTooltip]="passwordTooltip"
+            matTooltipPosition="above"
+            matTooltipTouchGestures="off"
+            #tooltipRef="matTooltip"
+            [matTooltipShowDelay]="1000000"
+            [matTooltipHideDelay]="1000000"
+            (focus)="tooltipRef.show(0)"
+            (blur)="tooltipRef.hide(0)"
+            (mousedown)="$event.stopPropagation()"
+          />
+          @if (
+            registerForm.get('password')?.hasError('required') &&
+            registerForm.get('password')?.touched
+          ) {
+            <mat-error>Le mot de passe est requis</mat-error>
+          }
+          @if (
+            (registerForm.get('password')?.hasError('minlength') ||
+              registerForm.get('password')?.hasError('passwordStrength')) &&
+            registerForm.get('password')?.touched
+          ) {
+            <mat-error>Le mot de passe n'est pas valide</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="registerForm.invalid || isSubmitting()"
+      >
+        S'inscrire
+      </button>
+    </form>
+  </div>
+</div>
