@@ -1,2 +1,17 @@
-<app-navbar variant="public" />
+<!-- Desktop: navbar with logo only -->
+<app-navbar variant="public" class="desktop-only" />
+
+<!-- Mobile: back button and logo -->
+<div class="mobile-header">
+  <button mat-icon-button class="back-button-mobile" (click)="navigateToLanding()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <img src="/logo_p6.png" alt="MDD Logo" class="mobile-logo" />
+</div>
+
+<!-- Desktop: back button below navbar -->
+<button mat-icon-button class="back-button-desktop" (click)="navigateToLanding()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <router-outlet />

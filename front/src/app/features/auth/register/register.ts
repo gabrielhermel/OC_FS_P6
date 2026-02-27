@@ -4,7 +4,6 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
@@ -25,7 +24,6 @@ import { passwordValidator } from '../../../shared/validators/password.validator
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
     MatTooltipModule,
   ],
   templateUrl: './register.html',
@@ -96,10 +94,5 @@ export class Register {
           });
         },
       });
-  }
-
-  /** Navigate back to public landing page */
-  navigateToLanding(): void {
-    this.router.navigate(['/']);
   }
 }

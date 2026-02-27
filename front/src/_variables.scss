@@ -30,3 +30,10 @@ $auth-back-button-size: 54px !default;
 $auth-back-button-icon-size: 36px !default;
 $auth-back-button-top: 2rem !default;
 $auth-back-button-left: 2.5rem !default;
+
+// Responsive mixins
+@mixin mobile-only {
+  @media (max-width: ($breakpoint-tablet - 1px)) {
+    @content;
+  }
+}

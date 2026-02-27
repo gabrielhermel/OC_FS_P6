@@ -159,7 +159,7 @@
   display: none;
 }
 
-@media (max-width: variables.$breakpoint-tablet) {
+@include variables.mobile-only {
   .desktop-only {
     display: none;
   }

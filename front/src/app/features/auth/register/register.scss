@@ -6,6 +6,10 @@
   margin-bottom: variables.$auth-form-header-margin;
   color: var(--mat-sys-on-surface);
   font-size: variables.$auth-form-header-size;
+
+  @include variables.mobile-only {
+    margin-top: 0;
+  }
 }
 
 .register-container {
@@ -15,24 +19,10 @@
   min-height: variables.$auth-container-min-height;
   background-color: var(--mat-sys-surface);
   position: relative;
-}
 
-.back-button {
-  position: fixed;
-  top: calc(
-    variables.$navbar-logo-height + variables.$navbar-padding-vertical +
-      variables.$auth-back-button-top
-  );
-  left: variables.$auth-back-button-left;
-  color: var(--mat-sys-on-surface);
-  width: variables.$auth-back-button-size;
-  height: variables.$auth-back-button-size;
-  z-index: 100;
-
-  mat-icon {
-    font-size: variables.$auth-back-button-icon-size;
-    width: variables.$auth-back-button-icon-size;
-    height: variables.$auth-back-button-icon-size;
+  @include variables.mobile-only {
+    align-items: flex-start;
+    width: 100%;
   }
 }
 
