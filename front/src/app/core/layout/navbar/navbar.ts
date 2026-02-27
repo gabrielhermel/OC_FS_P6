@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,10 +17,10 @@ import { MatButtonModule } from '@angular/material/button';
 export class Navbar {
   @Input() variant: 'public' | 'secured' = 'secured';
 
+  private router = inject(Router);
+
   /** Controls mobile menu visibility */
   protected menuOpen = signal(false);
-
-  constructor(private router: Router) {}
 
   /** Toggle mobile menu open/closed state */
   toggleMenu(): void {

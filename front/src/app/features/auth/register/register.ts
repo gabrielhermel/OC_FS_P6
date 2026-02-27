@@ -37,8 +37,10 @@ export class Register {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
+  /** Prevents duplicate submissions and manages submit button disabled state */
   readonly isSubmitting = signal(false);
 
+  /** Strongly typed reactive form. */
   readonly registerForm = this.fb.nonNullable.group({
     username: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
@@ -53,7 +55,7 @@ export class Register {
     '\xa0\xa0• Une lettre majuscule\n' +
     '\xa0\xa0• Un caractère spécial (@#$%^&+=!)';
 
-  // Getters for cleaner template access
+  // Getters keep template strongly typed
   get username() {
     return this.registerForm.controls.username;
   }
@@ -66,6 +68,7 @@ export class Register {
     return this.registerForm.controls.password;
   }
 
+  /** Handles registration submission. */
   onSubmit(): void {
     if (this.registerForm.invalid || this.isSubmitting()) {
       return;
@@ -95,6 +98,7 @@ export class Register {
       });
   }
 
+  /** Navigate back to public landing page */
   navigateToLanding(): void {
     this.router.navigate(['/']);
   }

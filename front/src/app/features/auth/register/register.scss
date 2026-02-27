@@ -18,12 +18,16 @@
 }
 
 .back-button {
-  position: absolute;
-  top: variables.$auth-back-button-top;
+  position: fixed;
+  top: calc(
+    variables.$navbar-logo-height + variables.$navbar-padding-vertical +
+      variables.$auth-back-button-top
+  );
   left: variables.$auth-back-button-left;
   color: var(--mat-sys-on-surface);
   width: variables.$auth-back-button-size;
   height: variables.$auth-back-button-size;
+  z-index: 100;
 
   mat-icon {
     font-size: variables.$auth-back-button-icon-size;

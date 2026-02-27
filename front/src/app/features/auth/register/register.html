@@ -32,6 +32,10 @@
       <div class="form-field">
         <label for="password">Mot de passe</label>
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <!--
+            Tooltip is manually controlled (long show/hide delay and focus/blur events)
+            to be persistent on focus rather than default hover tooltip.
+          -->
           <input
             matInput
             type="password"

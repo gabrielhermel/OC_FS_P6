@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './landing.scss',
 })
 export class Landing {
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   navigateToLogin(): void {
     this.router.navigate(['/login']);
