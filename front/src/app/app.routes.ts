@@ -7,6 +7,7 @@ import { Feed } from './features/articles/feed/feed';
 import { publicGuard } from './core/guards/public-guard';
 import { authGuard } from './core/guards/auth-guard';
 import { MainLayout } from './core/layout/main-layout/main-layout';
+import { Login } from './features/auth/login/login';
 
 export const routes: Routes = [
   // Public routes (no navbar)
@@ -31,7 +32,10 @@ export const routes: Routes = [
         path: 'register',
         component: Register,
       },
-      // Login will go here
+      {
+        path: 'login',
+        component: Login,
+      },
     ],
   },
   // Secured routes (full navbar with user menu)
