@@ -1,10 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, tap, catchError, throwError } from 'rxjs';
+import { Observable, tap, catchError, throwError, EMPTY, take } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../../shared/models/auth.model';
 import { User } from '../../shared/models/user.model';
+import { Store } from './store';
 
 /**
  * Authentication service handling user registration, login, logout, and token management.
@@ -12,32 +12,58 @@ import { User } from '../../shared/models/user.model';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-  private readonly TOKEN_KEY = 'auth_token';
+export class Auth {
+  private static readonly TOKEN_KEY = 'auth_token';
   private readonly apiUrl = `${environment.apiUrl}/auth`;
 
   /** Current authenticated user (null if not logged in) */
-  currentUser = signal<User | null>(null);
+  private readonly _currentUser = signal<User | null>(null);
+  readonly currentUser = this._currentUser.asReadonly();
 
-  /** Whether a user is currently authenticated */
-  isAuthenticated = signal(false);
+  /** Whether a user is currently authenticated: derived from currentUser */
+  readonly isAuthenticated = computed(() => this._currentUser() !== null);
+
+  /** Whether auth has finished initializing */
+  private readonly _authInitialized = signal(false);
+  readonly authInitialized = this._authInitialized.asReadonly();
 
   constructor(
     private http: HttpClient,
-    private router: Router,
+    private store: Store,
   ) {
-    this.initializeAuth();
+    this.initAuth();
   }
 
   /**
-   * Initialize authentication state from stored token
+   * Initialize auth state by fetching current user if token exists.
+   * If token is invalid, user is logged out.
    */
-  private initializeAuth(): void {
+  private initAuth(): void {
     const token = this.getToken();
-    if (token) {
-      // TODO: Validate token and fetch user data
-      this.isAuthenticated.set(true);
+
+    if (!token) {
+      this._authInitialized.set(true);
+      return;
     }
+
+    this.fetchCurrentUser().subscribe({
+      complete: () => this._authInitialized.set(true),
+    });
+  }
+
+  /**
+   * Fetch current user profile from backend.
+   * If request fails (expired/invalid token), logout.
+   */
+  private fetchCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/user/profile`).pipe(
+      take(1),
+      tap((user) => this._currentUser.set(user)),
+      catchError(() => {
+        this.logout();
+        return EMPTY;
+      }),
+    );
   }
 
   /**
@@ -61,29 +87,27 @@ export class AuthService {
   }
 
   /**
-   * Logout the current user
+   * Logout the current user.
+   * Component is responsible for navigation after logout.
    */
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    this.currentUser.set(null);
-    this.isAuthenticated.set(false);
-    this.router.navigate(['/']);
+    this.store.remove(Auth.TOKEN_KEY);
+    this._currentUser.set(null);
   }
 
   /**
    * Get the stored authentication token
    */
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return this.store.get(Auth.TOKEN_KEY);
   }
 
   /**
    * Handle successful authentication (login or register)
    */
   private handleAuthSuccess(response: AuthResponse): void {
-    localStorage.setItem(this.TOKEN_KEY, response.token);
-    this.currentUser.set(response.user);
-    this.isAuthenticated.set(true);
+    this.store.set(Auth.TOKEN_KEY, response.token);
+    this._currentUser.set(response.user);
   }
 
   /**
@@ -100,7 +124,6 @@ export class AuthService {
       errorMessage = error.error?.message || errorMessage;
     }
 
-    console.error('Authentication error:', error);
     return throwError(() => new Error(errorMessage));
   }
 }

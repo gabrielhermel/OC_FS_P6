@@ -2,6 +2,7 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Auth } from '../../services/auth';
 
 /**
  * Navbar component with two variants:
@@ -18,6 +19,7 @@ export class Navbar {
   @Input() variant: 'public' | 'secured' = 'secured';
 
   private router = inject(Router);
+  private auth = inject(Auth);
 
   /** Controls mobile menu visibility */
   protected menuOpen = signal(false);
@@ -34,7 +36,7 @@ export class Navbar {
 
   logout(): void {
     this.closeMenu();
-    // TODO: Implement logout logic with AuthService
+    this.auth.logout();
     this.router.navigate(['/']);
   }
 }
