@@ -1,1 +1,36 @@
-<p>feed works!</p>
+<div class="feed-container">
+  <div class="feed-header">
+    <button mat-raised-button color="primary" (click)="navigateToCreate()">Créer un article</button>
+    <button mat-button class="sort-button" (click)="toggleSort()">
+      Trier par <span class="sort-arrow">{{ sortOrder() === 'desc' ? '↓' : '↑' }}</span>
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading">Chargement...</div>
+  } @else if (hasError()) {
+    <!-- Error shown in snackbar, no content displayed -->
+  } @else if (articles().length === 0) {
+    <div class="empty-state">
+      <div class="empty-card">Vous n'êtes abonné à aucun thème pour le moment.</div>
+    </div>
+  } @else {
+    <div class="articles-grid">
+      @for (article of articles(); track article.id) {
+        <div class="article-card" (click)="navigateToArticle(article.id)">
+          <div class="article-title">{{ article.title }}</div>
+          <div class="article-meta">
+            <span class="article-date">Date: {{ formatDate(article.createdAt) }}</span>
+            <span class="article-author">Auteur: {{ article.authorName }}</span>
+          </div>
+          <p class="article-content desktop-content">
+            {{ truncateContent(article.content, 5) }}
+          </p>
+          <p class="article-content mobile-content">
+            {{ truncateContent(article.content, 4) }}
+          </p>
+        </div>
+      }
+    </div>
+  }
+</div>

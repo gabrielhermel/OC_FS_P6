@@ -1,6 +1,9 @@
 // Breakpoints
 $breakpoint-tablet: 768px !default;
 
+// Layout
+$layout-max-width: 1200px !default;
+
 // Logo
 $logo-img-width: 695px !default;
 
@@ -15,7 +18,7 @@ $mobile-backdrop-overlay: rgba(200, 200, 200, 0.5) !default;
 // Navbar
 $navbar-padding-vertical: 1rem !default;
 $navbar-padding-horizontal: 2rem !default;
-$navbar-max-width: 1200px !default;
+$navbar-max-width: $layout-max-width !default;
 $navbar-logo-height: 60px !default;
 $navbar-mobile-menu-width: 250px !default;
 
@@ -30,6 +33,21 @@ $auth-back-button-size: 54px !default;
 $auth-back-button-icon-size: 36px !default;
 $auth-back-button-top: 2rem !default;
 $auth-back-button-left: 2.5rem !default;
+
+// Feed page
+$feed-max-width: $layout-max-width !default;
+$feed-padding-desktop: 2rem !default;
+$feed-padding-mobile: 1rem !default;
+$feed-header-margin-bottom: 2rem !default;
+$feed-grid-gap-row: 2rem !default;
+$feed-grid-gap-column: 3rem !default;
+$feed-grid-gap-mobile: 1.25rem !default;
+$sort-button-gap: 0.25rem !default;
+
+// Cards
+$card-border-radius: 8px !default;
+$card-padding: 1rem !default;
+$card-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !default;
 
 // Responsive mixins
 @mixin mobile-only {
