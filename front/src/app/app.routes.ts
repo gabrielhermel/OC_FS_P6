@@ -8,6 +8,7 @@ import { publicGuard } from './core/guards/public-guard';
 import { authGuard } from './core/guards/auth-guard';
 import { MainLayout } from './core/layout/main-layout/main-layout';
 import { Login } from './features/auth/login/login';
+import { Topics } from './features/topics/list/topics';
 
 export const routes: Routes = [
   // Public routes (no navbar)
@@ -47,6 +48,10 @@ export const routes: Routes = [
       {
         path: 'articles',
         component: Feed,
+      },
+      {
+        path: 'topics',
+        component: Topics,
       },
     ],
   },

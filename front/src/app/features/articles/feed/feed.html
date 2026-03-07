@@ -24,10 +24,10 @@
             <span class="article-author">Auteur: {{ article.authorName }}</span>
           </div>
           <p class="article-content desktop-content">
-            {{ truncateContent(article.content, 5) }}
+            {{ truncateContent("Content: " + article.content, 5) }}
           </p>
           <p class="article-content mobile-content">
-            {{ truncateContent(article.content, 4) }}
+            {{ truncateContent("Content: " + article.content, 4) }}
           </p>
         </div>
       }

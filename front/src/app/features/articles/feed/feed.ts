@@ -2,7 +2,7 @@ import { Component, signal, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { Articles } from '../services/articles';
+import { ArticlesService } from '../services/articles';
 import { Article } from '../../../shared/models/article.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './feed.scss',
 })
 export class Feed implements OnInit {
-  private articlesService = inject(Articles);
+  private articlesService = inject(ArticlesService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 

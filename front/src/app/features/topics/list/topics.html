@@ -1,0 +1,30 @@
+<div class="topics-container">
+  @if (isLoading()) {
+    <div class="loading">Chargement...</div>
+  } @else if (hasError()) {
+    <!-- Error shown in snackbar, no content displayed -->
+  } @else {
+    <div class="topics-grid">
+      @for (topic of topics(); track topic.id) {
+        <div class="topic-card">
+          <div class="topic-title">{{ topic.name }}</div>
+          <p class="topic-description desktop-description">
+            Description: {{ truncateDescription(topic.description, 3) }}
+          </p>
+          <p class="topic-description mobile-description">
+            Description: {{ truncateDescription(topic.description, 4) }}
+          </p>
+          <button
+            mat-raised-button
+            [disabled]="topic.subscribed"
+            [color]="topic.subscribed ? '' : 'primary'"
+            class="subscribe-button"
+            (click)="onSubscribe(topic)"
+          >
+            {{ topic.subscribed ? 'Déjà abonné' : "S'abonner" }}
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>
