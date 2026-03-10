@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Article } from '../../../shared/models/article.model';
+import { CreateCommentRequest } from '../../../shared/models/create-comment.model';
+import { Comment } from '../../../shared/models/comment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +26,12 @@ export class ArticlesService {
    */
   getById(id: number): Observable<Article> {
     return this.http.get<Article>(`${this.apiUrl}/${id}`);
+  }
+
+  /**
+   * Create a comment on an article
+   */
+  createComment(articleId: number, request: CreateCommentRequest): Observable<Comment> {
+    return this.http.post<Comment>(`${this.apiUrl}/${articleId}/comments`, request);
   }
 }

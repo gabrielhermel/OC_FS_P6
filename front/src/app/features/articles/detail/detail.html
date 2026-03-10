@@ -1,0 +1,68 @@
+<div class="detail-container">
+  @if (isLoading()) {
+    <div class="loading">Chargement...</div>
+  } @else if (hasError()) {
+    <!-- Error shown in snackbar, no content displayed -->
+  } @else if (article(); as article) {
+    <div class="detail-layout">
+      <button mat-icon-button class="back-button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div class="detail-content">
+        <h2 class="article-title">{{ article.title }}</h2>
+
+        <div class="article-meta">
+          <span>Date: {{ formatDate(article.createdAt) }}</span>
+          <span>Auteur: {{ article.authorName }}</span>
+          <span>Thème: {{ article.topicName }}</span>
+        </div>
+
+        <div class="article-content">Contenu: {{ article.content }}</div>
+
+        <hr class="divider" />
+
+        <div class="comments-section">
+          <h3 class="comments-title">Commentaires</h3>
+
+          <div class="comments-wrapper">
+            <div class="comments-inner">
+              <div class="comments-container">
+                @if (article.comments && article.comments.length > 0) {
+                  <div class="comments-list">
+                    @for (comment of article.comments; track comment.id) {
+                      <div class="comment">
+                        <div class="comment-author">{{ comment.authorName }}</div>
+                        <div class="comment-card">{{ comment.content }}</div>
+                      </div>
+                    }
+                  </div>
+                }
+
+                <form [formGroup]="commentForm" (ngSubmit)="onSubmitComment()" class="comment-form">
+                  <textarea
+                    formControlName="content"
+                    placeholder="Écrivez ici votre commentaire"
+                    class="comment-input"
+                    rows="5"
+                  ></textarea>
+                </form>
+              </div>
+            </div>
+
+            <button
+              mat-icon-button
+              color="primary"
+              type="submit"
+              [disabled]="commentForm.invalid || isSubmitting()"
+              (click)="onSubmitComment()"
+              class="send-button"
+            >
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
