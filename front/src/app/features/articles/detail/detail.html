@@ -46,6 +46,17 @@
                   class="comment-input"
                   rows="5"
                 ></textarea>
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="commentForm.invalid || isSubmitting()"
+                  (click)="onSubmitComment()"
+                  class="mobile-send-button"
+                  style="display: none"
+                >
+                  <mat-icon>send</mat-icon>
+                </button>
               </form>
             </div>
           </div>
@@ -56,7 +67,7 @@
             type="submit"
             [disabled]="commentForm.invalid || isSubmitting()"
             (click)="onSubmitComment()"
-            class="send-button"
+            class="desktop-send-button"
           >
             <mat-icon>send</mat-icon>
           </button>

@@ -96,6 +96,11 @@
   display: flex;
   gap: variables.$detail-comment-gap;
   align-items: flex-end;
+
+  @include variables.mobile-only {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .comments-inner {
@@ -118,10 +123,23 @@
   grid-template-columns: auto 1fr;
   gap: variables.$detail-comment-gap;
   align-items: start;
+
+  @include variables.mobile-only {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .comment {
   display: contents;
+
+  @include variables.mobile-only {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
 }
 
 .comment-author {
@@ -138,11 +156,21 @@
   padding: variables.$card-padding;
   border-radius: variables.$card-border-radius;
   line-height: 1.5;
+
+  @include variables.mobile-only {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .comment-form {
   display: flex;
   margin-top: variables.$detail-comment-gap;
+
+  @include variables.mobile-only {
+    gap: 1rem;
+    margin-top: 0;
+  }
 }
 
 .comment-input {
@@ -166,7 +194,7 @@
   }
 }
 
-.send-button {
+.desktop-send-button {
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -183,11 +211,43 @@
     )
   );
 
+  @include variables.mobile-only {
+    display: none;
+  }
+
   mat-icon {
     font-size: variables.$detail-back-button-icon-size;
     width: variables.$detail-back-button-icon-size;
     height: variables.$detail-back-button-icon-size;
     padding-left: variables.$detail-send-button-offset;
+    color: var(--mat-sys-primary);
+  }
+}
+
+.mobile-send-button {
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: variables.$detail-back-button-icon-size;
+  height: variables.$detail-back-button-icon-size;
+  transform: translateY(
+    calc(
+      0.5 *
+        (
+          (5 * 1.5em + variables.$detail-textarea-padding * 2) / 2 -
+            variables.$detail-back-button-size / 2
+        )
+    )
+  );
+
+  @include variables.mobile-only {
+    display: flex !important;
+  }
+
+  mat-icon {
+    font-size: variables.$detail-back-button-icon-size;
+    width: variables.$detail-back-button-icon-size;
+    height: variables.$detail-back-button-icon-size;
     color: var(--mat-sys-primary);
   }
 }
