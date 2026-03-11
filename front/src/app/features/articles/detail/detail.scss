@@ -5,6 +5,10 @@
   margin: 0 auto;
   padding: variables.$feed-padding-desktop;
   color: var(--mat-sys-on-surface);
+
+  @include variables.mobile-only {
+    padding: variables.$feed-padding-mobile;
+  }
 }
 
 .loading {
@@ -17,6 +21,7 @@
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .back-button {
@@ -32,23 +37,38 @@
   }
 }
 
-.detail-content {
-  flex: 1;
-  min-width: 0;
-  padding-top: 0.7rem;
-}
-
 .article-title {
   font-size: variables.$detail-title-size;
   font-weight: 500;
   margin: 0 0 1rem 0;
   word-wrap: break-word;
+  flex: 1;
+  min-width: 0;
+  padding-top: 0.7rem;
+}
+
+.detail-content {
+  margin-left: calc(variables.$detail-back-button-size + 1rem);
+  min-width: 0;
+  max-width: 100%;
+
+  @include variables.mobile-only {
+    margin-left: 0;
+  }
 }
 
 .article-meta {
   display: flex;
-  gap: variables.$detail-meta-gap;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  column-gap: 2rem;
   margin-bottom: 1rem;
+  min-width: 0;
+  max-width: 100%;
+
+  span {
+    white-space: nowrap;
+  }
 }
 
 .article-content {
@@ -81,6 +101,10 @@
 .comments-inner {
   flex: 1;
   margin-left: variables.$detail-comment-indent;
+
+  @include variables.mobile-only {
+    margin-left: 0;
+  }
 }
 
 .comments-container {
@@ -103,6 +127,10 @@
 .comment-author {
   font-size: 1rem;
   flex-shrink: 0;
+
+  @include variables.mobile-only {
+    text-align: right;
+  }
 }
 
 .comment-card {
