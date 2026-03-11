@@ -15,6 +15,10 @@ $button-avatar-gap: 2rem !default;
 $mobile-menu-shadow: -2px 0 8px rgba(0, 0, 0, 0.15) !default;
 $mobile-backdrop-overlay: rgba(200, 200, 200, 0.5) !default;
 
+// Shared icon buttons
+$icon-button-size: 54px !default;
+$icon-button-icon-size: 36px !default;
+
 // Navbar
 $navbar-padding-vertical: 1rem !default;
 $navbar-padding-horizontal: 2rem !default;
@@ -29,8 +33,8 @@ $auth-form-header-size: 1.5rem !default;
 $auth-form-header-weight: 400 !default;
 $auth-form-header-margin: 2rem !default;
 $auth-submit-button-min-width: 150px !default;
-$auth-back-button-size: 54px !default;
-$auth-back-button-icon-size: 36px !default;
+$auth-back-button-size: $icon-button-size !default;
+$auth-back-button-icon-size: $icon-button-icon-size !default;
 $auth-back-button-top: 2rem !default;
 $auth-back-button-left: 2.5rem !default;
 
@@ -50,14 +54,16 @@ $topic-subscribe-button-width: 150px !default;
 $topic-subscribe-button-disabled-color: #939393 !default;
 
 // Article detail page
-$detail-back-button-size: 54px !default;
-$detail-back-button-icon-size: 36px !default;
 $detail-title-size: 1.5rem !default;
 $detail-divider-margin-right: 40px !default;
 $detail-comment-indent: 2rem !default;
 $detail-comment-gap: 1rem !default;
 $detail-textarea-padding: 0.75rem !default;
 $detail-send-button-offset: 6px !default;
+$detail-back-button-size: $icon-button-size !default;
+$detail-back-button-icon-size: $icon-button-icon-size !default;
+$detail-meta-row-gap: 1rem !default;
+$detail-meta-column-gap: 2rem !default;
 
 // Cards
 $card-border-radius: 8px !default;

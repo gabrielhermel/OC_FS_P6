@@ -25,7 +25,7 @@
       <div class="comments-section">
         <h3 class="comments-title">Commentaires</h3>
 
-        <div class="comments-wrapper">
+        <div class="comments-wrapper" [style.--textarea-rows]="TEXTAREA_ROWS">
           <div class="comments-inner">
             <div class="comments-container">
               @if (article.comments && article.comments.length > 0) {
@@ -44,16 +44,14 @@
                   formControlName="content"
                   placeholder="Écrivez ici votre commentaire"
                   class="comment-input"
-                  rows="5"
+                  [attr.rows]="TEXTAREA_ROWS"
                 ></textarea>
                 <button
                   mat-icon-button
                   color="primary"
                   type="submit"
                   [disabled]="commentForm.invalid || isSubmitting()"
-                  (click)="onSubmitComment()"
                   class="mobile-send-button"
-                  style="display: none"
                 >
                   <mat-icon>send</mat-icon>
                 </button>

@@ -26,6 +26,8 @@ export class Detail implements OnInit {
   private fb = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
 
+  readonly TEXTAREA_ROWS = 5;
+
   article = signal<Article | null>(null);
   isLoading = signal(true);
   hasError = signal(false);

@@ -60,8 +60,8 @@
 .article-meta {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 1rem;
-  column-gap: 2rem;
+  row-gap: variables.$detail-meta-row-gap;
+  column-gap: variables.$detail-meta-column-gap;
   margin-bottom: 1rem;
   min-width: 0;
   max-width: 100%;
@@ -194,6 +194,11 @@
   }
 }
 
+$send-button-offset: calc(
+  0.375em * var(--textarea-rows) + 0.5 * variables.$detail-textarea-padding - 0.25 *
+    variables.$detail-back-button-size
+);
+
 .desktop-send-button {
   flex-shrink: 0;
   display: flex;
@@ -201,15 +206,7 @@
   justify-content: center;
   width: variables.$detail-back-button-size;
   height: variables.$detail-back-button-size;
-  transform: translateY(
-    calc(
-      -0.5 *
-        (
-          (5 * 1.5em + variables.$detail-textarea-padding * 2) / 2 -
-            variables.$detail-back-button-size / 2
-        )
-    )
-  );
+  transform: translateY(calc(-1 * $send-button-offset));
 
   @include variables.mobile-only {
     display: none;
@@ -230,18 +227,11 @@
   justify-content: center;
   width: variables.$detail-back-button-icon-size;
   height: variables.$detail-back-button-icon-size;
-  transform: translateY(
-    calc(
-      0.5 *
-        (
-          (5 * 1.5em + variables.$detail-textarea-padding * 2) / 2 -
-            variables.$detail-back-button-size / 2
-        )
-    )
-  );
+  transform: translateY($send-button-offset);
+  display: none;
 
   @include variables.mobile-only {
-    display: flex !important;
+    display: flex;
   }
 
   mat-icon {
