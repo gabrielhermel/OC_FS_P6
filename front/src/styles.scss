@@ -236,3 +236,57 @@ body {
   align-items: center;
   gap: 0.25rem;
 }
+
+.create-form .mat-mdc-form-field-focus-overlay {
+  background-color: transparent;
+}
+.create-form .mdc-notched-outline__leading,
+.create-form .mdc-notched-outline__notch,
+.create-form .mdc-notched-outline__trailing {
+  border-color: var(--mat-sys-primary) !important;
+}
+
+.create-form .content-field .mat-mdc-text-field-wrapper {
+  padding-left: 0;
+  padding-right: 1px;
+  padding-bottom: 1px;
+}
+
+.create-form .content-field .mat-mdc-form-field-infix {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.topic-select-panel .mat-mdc-option {
+  min-height: 2em;
+  height: 2em;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--mat-sys-outline-variant) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--mat-sys-outline);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -4,6 +4,11 @@ $breakpoint-tablet: 768px !default;
 // Layout
 $layout-max-width: 1200px !default;
 
+// Shared container
+$container-max-width: $layout-max-width !default;
+$container-padding-desktop: 2rem !default;
+$container-padding-mobile: 1rem !default;
+
 // Logo
 $logo-img-width: 695px !default;
 
@@ -18,6 +23,10 @@ $mobile-backdrop-overlay: rgba(200, 200, 200, 0.5) !default;
 // Shared icon buttons
 $icon-button-size: 54px !default;
 $icon-button-icon-size: 36px !default;
+
+// Shared page elements
+$page-title-size: 1.5rem !default;
+$page-title-weight: 500 !default;
 
 // Navbar
 $navbar-padding-vertical: 1rem !default;
@@ -39,9 +48,9 @@ $auth-back-button-top: 2rem !default;
 $auth-back-button-left: 2.5rem !default;
 
 // Feed page
-$feed-max-width: $layout-max-width !default;
-$feed-padding-desktop: 2rem !default;
-$feed-padding-mobile: 1rem !default;
+$feed-max-width: $container-max-width !default;
+$feed-padding-desktop: $container-padding-desktop !default;
+$feed-padding-mobile: $container-padding-mobile !default;
 $feed-header-margin-bottom: 2rem !default;
 $feed-grid-gap-row: 2rem !default;
 $feed-grid-gap-column: 3rem !default;
@@ -54,7 +63,8 @@ $topic-subscribe-button-width: 150px !default;
 $topic-subscribe-button-disabled-color: #939393 !default;
 
 // Article detail page
-$detail-title-size: 1.5rem !default;
+$detail-title-size: $page-title-size !default;
+$detail-title-weight: $page-title-weight !default;
 $detail-divider-margin-right: 40px !default;
 $detail-comment-indent: 2rem !default;
 $detail-comment-gap: 1rem !default;
@@ -64,6 +74,13 @@ $detail-back-button-size: $icon-button-size !default;
 $detail-back-button-icon-size: $icon-button-icon-size !default;
 $detail-meta-row-gap: 1rem !default;
 $detail-meta-column-gap: 2rem !default;
+
+// Article create page
+$create-title-size: $page-title-size !default;
+$create-title-weight: $page-title-weight !default;
+$create-back-button-size: $icon-button-size !default;
+$create-back-button-icon-size: $icon-button-icon-size !default;
+$create-form-width: 50% !default;
 
 // Cards
 $card-border-radius: 8px !default;
