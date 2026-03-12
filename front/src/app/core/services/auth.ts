@@ -2,8 +2,8 @@ import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap, catchError, throwError, EMPTY, take } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../../shared/models/auth.model';
-import { User } from '../../shared/models/user.model';
+import { AuthResponse, LoginRequest, RegisterRequest } from '../../shared/models/auth';
+import { User } from '../../shared/models/user';
 import { Store } from './store';
 
 /**

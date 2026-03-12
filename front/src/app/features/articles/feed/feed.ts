@@ -1,10 +1,11 @@
-import { Component, signal, inject, OnInit } from '@angular/core';
+import { Component, signal, inject, OnInit, DestroyRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ArticlesService } from '../services/articles';
-import { Article } from '../../../shared/models/article.model';
+import { Article } from '../../../shared/models/article';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Articles feed page component.
@@ -21,6 +22,7 @@ export class Feed implements OnInit {
   private articlesService = inject(ArticlesService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private destroyRef = inject(DestroyRef);
 
   articles = signal<Article[]>([]);
   sortOrder = signal<'asc' | 'desc'>('desc');
@@ -40,34 +42,37 @@ export class Feed implements OnInit {
   loadArticles(): void {
     this.isLoading.set(true);
     this.hasError.set(false);
-    this.articlesService.getFeed(this.sortOrder()).subscribe({
-      next: (articles) => {
-        this.articles.set(articles);
-        this.isLoading.set(false);
-      },
-      error: (error) => {
-        console.error('Error loading articles:', error);
-        this.isLoading.set(false);
-        this.hasError.set(true);
+    this.articlesService
+      .getFeed(this.sortOrder())
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (articles) => {
+          this.articles.set(articles);
+          this.isLoading.set(false);
+        },
+        error: (error) => {
+          console.error('Error loading articles:', error);
+          this.isLoading.set(false);
+          this.hasError.set(true);
 
-        let message = 'Erreur lors du chargement des articles';
+          let message = 'Erreur lors du chargement des articles';
 
-        if (error instanceof Error) {
-          message = error.message;
-        } else if (error?.status === 0) {
-          message = 'Impossible de contacter le serveur';
-        } else if (error?.status === 404) {
-          message = 'Articles introuvables';
-        }
+          if (error instanceof Error) {
+            message = error.message;
+          } else if (error?.status === 0) {
+            message = 'Impossible de contacter le serveur';
+          } else if (error?.status === 404) {
+            message = 'Articles introuvables';
+          }
 
-        this.snackBar.open(message, 'Fermer', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
-      },
-    });
+          this.snackBar.open(message, 'Fermer', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar'],
+          });
+        },
+      });
   }
 
   /**

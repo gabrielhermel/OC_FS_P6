@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
 import { Auth } from '../../../core/services/auth';
-import { LoginRequest } from '../../../shared/models/auth.model';
+import { LoginRequest } from '../../../shared/models/auth';
 
 /**
  * User login page component.

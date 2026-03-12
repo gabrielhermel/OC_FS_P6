@@ -1,0 +1,53 @@
+<div class="create-container">
+  <div class="create-header">
+    <button mat-icon-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="page-title">Créer un nouvel article</h1>
+  </div>
+
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="create-form">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-select formControlName="topicId" placeholder="Sélectionner un thème">
+        @for (topic of topics(); track topic.id) {
+          <mat-option [value]="topic.id">{{ topic.name }}</mat-option>
+        }
+      </mat-select>
+      @if (
+        articleForm.get('topicId')?.hasError('required') && articleForm.get('topicId')?.touched
+      ) {
+        <mat-error>Le thème est requis</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <input matInput formControlName="title" placeholder="Titre de l'article" />
+      @if (articleForm.get('title')?.hasError('required') && articleForm.get('title')?.touched) {
+        <mat-error>Le titre est requis</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <textarea
+        matInput
+        formControlName="content"
+        placeholder="Contenu de l'article"
+        rows="8"
+      ></textarea>
+      @if (
+        articleForm.get('content')?.hasError('required') && articleForm.get('content')?.touched
+      ) {
+        <mat-error>Le contenu est requis</mat-error>
+      }
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="articleForm.invalid || isSubmitting() || isLoadingTopics()"
+    >
+      Créer
+    </button>
+  </form>
+</div>

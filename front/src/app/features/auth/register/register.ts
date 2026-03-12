@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
 import { Auth } from '../../../core/services/auth';
-import { RegisterRequest } from '../../../shared/models/auth.model';
+import { RegisterRequest } from '../../../shared/models/auth';
 import { passwordValidator } from '../../../shared/validators/password.validator';
 
 /**

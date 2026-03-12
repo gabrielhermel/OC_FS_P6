@@ -2,9 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { Article } from '../../../shared/models/article.model';
-import { CreateCommentRequest } from '../../../shared/models/create-comment.model';
-import { Comment } from '../../../shared/models/comment.model';
+import { Article } from '../../../shared/models/article';
+import { CreateCommentRequest } from '../../../shared/models/create-comment';
+import { Comment } from '../../../shared/models/comment';
+import { CreateArticleRequest } from '../../../shared/models/create-article';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,12 @@ export class ArticlesService {
    */
   createComment(articleId: number, request: CreateCommentRequest): Observable<Comment> {
     return this.http.post<Comment>(`${this.apiUrl}/${articleId}/comments`, request);
+  }
+
+  /**
+   * Create a new article
+   */
+  createArticle(request: CreateArticleRequest): Observable<Article> {
+    return this.http.post<Article>(this.apiUrl, request);
   }
 }

@@ -9,7 +9,8 @@ import { authGuard } from './core/guards/auth-guard';
 import { MainLayout } from './core/layout/main-layout/main-layout';
 import { Login } from './features/auth/login/login';
 import { Topics } from './features/topics/list/topics';
-import { Detail } from './features/articles/detail/detail';
+import { ArticleDetail} from './features/articles/detail/detail';
+import { CreateArticle } from './features/articles/create/create';
 
 export const routes: Routes = [
   // Public routes (no navbar)
@@ -51,12 +52,16 @@ export const routes: Routes = [
         component: Feed,
       },
       {
-        path: 'topics',
-        component: Topics,
+        path: 'articles/create',
+        component: CreateArticle,
       },
       {
         path: 'articles/:id',
-        component: Detail,
+        component: ArticleDetail,
+      },
+      {
+        path: 'topics',
+        component: Topics,
       },
     ],
   },
