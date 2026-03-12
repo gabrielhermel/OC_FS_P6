@@ -1,7 +1,51 @@
 // Breakpoints
 $breakpoint-tablet: 768px !default;
 
-// Layout
+// ─── Design Tokens ────────────────────────────────────────────────────────────
+
+// Border radii
+$radius-none: 0px !default;
+$radius-xs: 2px !default;
+$radius-sm: 4px !default;
+$radius-md: 8px !default;
+$radius-lg: 16px !default;
+$radius-full: 50% !default;
+
+// Colors – surfaces & backgrounds
+$color-white: #ffffff !default;
+$color-black: #000 !default;
+$color-surface-low: #fafafa !default;
+$color-surface: #f5f5f5 !default;
+$color-surface-high: #eeeeee !default;
+$color-surface-highest: #e0e0e0 !default;
+$color-inverse-surface: #424242 !default;
+
+// Colors – brand
+$color-primary: #7763c4 !default;
+$color-primary-container: #ede7f6 !default;
+$color-tertiary: #ffd740 !default;
+$color-tertiary-container: #fff8e1 !default;
+$color-error: #f44336 !default;
+$color-error-container: #fdecea !default;
+
+// Colors – on-* (text/icon over surfaces)
+$color-on-surface-high: rgba(0, 0, 0, 0.87) !default;
+$color-on-surface-medium: rgba(0, 0, 0, 0.54) !default;
+$color-on-surface-disabled: rgba(0, 0, 0, 0.38) !default;
+$color-on-surface-divider: rgba(0, 0, 0, 0.12) !default;
+
+// Colors – misc
+$color-disabled-text: #939393 !default;
+
+// Typography
+$font-size-tooltip: 0.875rem !default;
+
+// Scrollbar
+$scrollbar-width: 10px !default;
+$scrollbar-border: 3px !default;
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+
 $layout-max-width: 1200px !default;
 
 // Shared container
@@ -9,33 +53,50 @@ $container-max-width: $layout-max-width !default;
 $container-padding-desktop: 2rem !default;
 $container-padding-mobile: 1rem !default;
 
-// Logo
-$logo-img-width: 695px !default;
+// ─── Spacing & Gaps ───────────────────────────────────────────────────────────
 
-// Spacing
 $button-gap: 1rem !default;
 $button-avatar-gap: 2rem !default;
 
-// Shadows & Overlays
+// ─── Shadows & Overlays ───────────────────────────────────────────────────────
+
 $mobile-menu-shadow: -2px 0 8px rgba(0, 0, 0, 0.15) !default;
 $mobile-backdrop-overlay: rgba(200, 200, 200, 0.5) !default;
 
-// Shared icon buttons
+// ─── Shared Components ────────────────────────────────────────────────────────
+
+// Icon buttons
 $icon-button-size: 54px !default;
 $icon-button-icon-size: 36px !default;
 
-// Shared page elements
+// Page elements
 $page-title-size: 1.5rem !default;
 $page-title-weight: 500 !default;
 
-// Navbar
+// Cards
+$card-border-radius: $radius-md !default;
+$card-padding: 1rem !default;
+$card-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !default;
+$card-content-gap: 0.75rem !default;
+
+// Loading state (shared across pages)
+$loading-padding: 3rem !default;
+
+// Logo
+$logo-img-width: 695px !default;
+
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+
 $navbar-padding-vertical: 1rem !default;
 $navbar-padding-horizontal: 2rem !default;
 $navbar-max-width: $layout-max-width !default;
 $navbar-logo-height: 60px !default;
 $navbar-mobile-menu-width: 250px !default;
+$navbar-avatar-icon-size: 40px !default;
+$navbar-nav-btn-font-size: 1.125rem !default;
 
-// Auth pages
+// ─── Auth Pages ───────────────────────────────────────────────────────────────
+
 $auth-card-max-width: 300px !default;
 $auth-container-min-height: 60vh !default;
 $auth-form-header-size: 1.5rem !default;
@@ -46,28 +107,42 @@ $auth-back-button-size: $icon-button-size !default;
 $auth-back-button-icon-size: $icon-button-icon-size !default;
 $auth-back-button-top: 2rem !default;
 $auth-back-button-left: 2.5rem !default;
+$auth-back-button-mobile-top: 1rem !default;
+$auth-back-button-mobile-left: 1rem !default;
+$auth-mobile-logo-margin-top: 3rem !default;
 
-// Feed page
+// ─── Feed Page ────────────────────────────────────────────────────────────────
+
 $feed-max-width: $container-max-width !default;
 $feed-padding-desktop: $container-padding-desktop !default;
 $feed-padding-mobile: $container-padding-mobile !default;
 $feed-header-margin-bottom: 2rem !default;
+$feed-header-mobile-gap: 0.5rem !default;
 $feed-grid-gap-row: 2rem !default;
 $feed-grid-gap-column: 3rem !default;
 $feed-grid-gap-mobile: 1.25rem !default;
+$feed-empty-card-padding: 2rem !default;
+$feed-empty-card-max-width: 400px !default;
 $sort-button-gap: 0.25rem !default;
+$sort-arrow-size: 1.5rem !default;
+$sort-arrow-offset: -0.125rem !default;
 
-// Topics page
+// ─── Topics Page ──────────────────────────────────────────────────────────────
+
 $topics-grid-gap-column: 1rem !default;
 $topic-subscribe-button-width: 150px !default;
-$topic-subscribe-button-disabled-color: #939393 !default;
+$topic-subscribe-button-disabled-color: $color-disabled-text !default;
 
-// Article detail page
+// ─── Article Detail Page ──────────────────────────────────────────────────────
+
 $detail-title-size: $page-title-size !default;
 $detail-title-weight: $page-title-weight !default;
+$detail-title-padding-top: 0.7rem !default;
 $detail-divider-margin-right: 40px !default;
+$detail-section-spacing: 1.5rem !default;
 $detail-comment-indent: 2rem !default;
 $detail-comment-gap: 1rem !default;
+$detail-comment-mobile-gap: 0.5rem !default;
 $detail-textarea-padding: 0.75rem !default;
 $detail-send-button-offset: 6px !default;
 $detail-back-button-size: $icon-button-size !default;
@@ -75,19 +150,43 @@ $detail-back-button-icon-size: $icon-button-icon-size !default;
 $detail-meta-row-gap: 1rem !default;
 $detail-meta-column-gap: 2rem !default;
 
-// Article create page
+// ─── Article Create Page ──────────────────────────────────────────────────────
+
 $create-title-size: $page-title-size !default;
 $create-title-weight: $page-title-weight !default;
+$create-title-mobile-margin-bottom: 1.75rem !default;
 $create-back-button-size: $icon-button-size !default;
 $create-back-button-icon-size: $icon-button-icon-size !default;
 $create-form-width: 50% !default;
+$create-header-gap: 1rem !default;
+$create-header-margin-bottom: 2rem !default;
+$create-form-gap: 0.25rem !default;
+$create-submit-padding-x: 3rem !default;
+$create-submit-margin-top: 1.25rem !default;
+$create-textarea-padding: 12px 16px !default;
 
-// Cards
-$card-border-radius: 8px !default;
-$card-padding: 1rem !default;
-$card-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !default;
+// ─── Landing Page ─────────────────────────────────────────────────────────────
 
-// Responsive mixins
+$landing-button-gap-desktop: 60px !default;
+$landing-button-gap-mobile: 35px !default;
+$landing-button-min-width: 200px !default;
+
+// ─── Form Fields ──────────────────────────────────────────────────────────────
+
+$form-field-height: 2.25rem !default;
+$form-field-vertical-padding: 0.5rem !default;
+$form-field-subscript-min-height: 1.25rem !default;
+$password-tooltip-min-width: 300px !default;
+$password-tooltip-padding: 12px !default;
+$password-tooltip-translate-y: -16px !default;
+
+// ─── Snackbar (error variant) ─────────────────────────────────────────────────
+
+$error-snackbar-border-width: 2px !default;
+$error-snackbar-padding: 1.5rem !default;
+
+// ─── Responsive Mixins ────────────────────────────────────────────────────────
+
 @mixin mobile-only {
   @media (max-width: ($breakpoint-tablet - 1px)) {
     @content;

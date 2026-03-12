@@ -59,8 +59,8 @@ app-navbar {
 
 .back-button-mobile {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: variables.$auth-back-button-mobile-top;
+  left: variables.$auth-back-button-mobile-left;
   color: var(--mat-sys-on-surface);
   width: variables.$auth-back-button-size;
   height: variables.$auth-back-button-size;
@@ -75,6 +75,6 @@ app-navbar {
 .mobile-logo {
   width: 85vw;
   max-width: variables.$logo-img-width;
-  margin-top: 3rem;
+  margin-top: variables.$auth-mobile-logo-margin-top;
   margin-bottom: 0;
 }

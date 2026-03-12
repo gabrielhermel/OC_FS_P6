@@ -18,39 +18,39 @@ html {
 
   @include mat.theme-overrides(
     (
-      surface: #ffffff,
-      surface-container-lowest: #ffffff,
-      surface-container-low: #fafafa,
-      surface-container: #f5f5f5,
-      surface-container-high: #eeeeee,
-      surface-container-highest: #e0e0e0,
-      on-surface: rgba(0, 0, 0, 0.87),
-      on-surface-variant: rgba(0, 0, 0, 0.54),
-      on-background: rgba(0, 0, 0, 0.87),
-      outline: rgba(0, 0, 0, 0.38),
-      outline-variant: rgba(0, 0, 0, 0.12),
-      inverse-surface: #424242,
-      inverse-on-surface: #ffffff,
+      surface: variables.$color-white,
+      surface-container-lowest: variables.$color-white,
+      surface-container-low: variables.$color-surface-low,
+      surface-container: variables.$color-surface,
+      surface-container-high: variables.$color-surface-high,
+      surface-container-highest: variables.$color-surface-highest,
+      on-surface: variables.$color-on-surface-high,
+      on-surface-variant: variables.$color-on-surface-medium,
+      on-background: variables.$color-on-surface-high,
+      outline: variables.$color-on-surface-disabled,
+      outline-variant: variables.$color-on-surface-divider,
+      inverse-surface: variables.$color-inverse-surface,
+      inverse-on-surface: variables.$color-white,
 
-      primary: #7763c4,
-      on-primary: #ffffff,
-      primary-container: #ede7f6,
-      on-primary-container: #7763c4,
+      primary: variables.$color-primary,
+      on-primary: variables.$color-white,
+      primary-container: variables.$color-primary-container,
+      on-primary-container: variables.$color-primary,
 
-      tertiary: #ffd740,
-      on-tertiary: rgba(0, 0, 0, 0.87),
-      tertiary-container: #fff8e1,
-      on-tertiary-container: rgba(0, 0, 0, 0.87),
-      error: #f44336,
-      on-error: #ffffff,
-      error-container: #fdecea,
-      on-error-container: #f44336,
+      tertiary: variables.$color-tertiary,
+      on-tertiary: variables.$color-on-surface-high,
+      tertiary-container: variables.$color-tertiary-container,
+      on-tertiary-container: variables.$color-on-surface-high,
+      error: variables.$color-error,
+      on-error: variables.$color-white,
+      error-container: variables.$color-error-container,
+      on-error-container: variables.$color-error,
 
-      corner-extra-large: 8px,
-      corner-large: 8px,
-      corner-medium: 8px,
-      corner-small: 4px,
-      corner-extra-small: 2px,
+      corner-extra-large: variables.$radius-md,
+      corner-large: variables.$radius-md,
+      corner-medium: variables.$radius-md,
+      corner-small: variables.$radius-sm,
+      corner-extra-small: variables.$radius-xs,
     )
   );
 }
@@ -58,11 +58,11 @@ html {
 :root {
   @include mat.button-overrides(
     (
-      filled-container-shape: 8px,
-      outlined-container-shape: 8px,
-      protected-container-shape: 8px,
-      text-container-shape: 8px,
-      tonal-container-shape: 8px,
+      filled-container-shape: variables.$radius-md,
+      outlined-container-shape: variables.$radius-md,
+      protected-container-shape: variables.$radius-md,
+      text-container-shape: variables.$radius-md,
+      tonal-container-shape: variables.$radius-md,
       outlined-outline-color: #000,
       outlined-label-text-color: #000,
     )
@@ -70,38 +70,38 @@ html {
 
   @include mat.card-overrides(
     (
-      elevated-container-shape: 8px,
-      outlined-container-shape: 8px,
-      elevated-container-color: #ffffff,
-      outlined-container-color: #ffffff,
+      elevated-container-shape: variables.$radius-md,
+      outlined-container-shape: variables.$radius-md,
+      elevated-container-color: variables.$color-white,
+      outlined-container-color: variables.$color-white,
     )
   );
 
   @include mat.fab-overrides(
     (
-      container-shape: 50%,
-      small-container-shape: 50%,
+      container-shape: variables.$radius-full,
+      small-container-shape: variables.$radius-full,
     )
   );
 
   @include mat.chips-overrides(
     (
-      container-shape-radius: 16px,
+      container-shape-radius: variables.$radius-lg,
     )
   );
 
   @include mat.dialog-overrides(
     (
-      container-shape: 8px,
-      container-color: #ffffff,
+      container-shape: variables.$radius-md,
+      container-color: variables.$color-white,
     )
   );
 
   @include mat.form-field-overrides(
     (
-      filled-container-shape: 8px,
-      outlined-container-shape: 8px,
-      filled-container-color: #f5f5f5,
+      filled-container-shape: variables.$radius-md,
+      outlined-container-shape: variables.$radius-md,
+      filled-container-color: variables.$color-surface,
       outlined-outline-color: var(--mat-sys-on-surface),
       outlined-hover-outline-color: var(--mat-sys-on-surface),
       outlined-focus-outline-color: var(--mat-sys-primary),
@@ -109,73 +109,73 @@ html {
   );
   @include mat.select-overrides(
     (
-      panel-background-color: #ffffff,
+      panel-background-color: variables.$color-white,
     )
   );
 
   @include mat.menu-overrides(
     (
-      container-shape: 8px,
-      container-color: #ffffff,
+      container-shape: variables.$radius-md,
+      container-color: variables.$color-white,
     )
   );
 
   @include mat.expansion-overrides(
     (
-      container-shape: 0px,
-      container-background-color: #ffffff,
+      container-shape: variables.$radius-none,
+      container-background-color: variables.$color-white,
     )
   );
 
   @include mat.snack-bar-overrides(
     (
-      container-shape: 8px,
-      container-color: #424242,
-      supporting-text-color: #ffffff,
+      container-shape: variables.$radius-md,
+      container-color: variables.$color-inverse-surface,
+      supporting-text-color: variables.$color-white,
     )
   );
 
   @include mat.autocomplete-overrides(
     (
-      container-shape: 8px,
-      background-color: #ffffff,
+      container-shape: variables.$radius-md,
+      background-color: variables.$color-white,
     )
   );
 
   @include mat.bottom-sheet-overrides(
     (
-      container-shape: 8px,
-      container-background-color: #ffffff,
+      container-shape: variables.$radius-md,
+      container-background-color: variables.$color-white,
     )
   );
 
   @include mat.datepicker-overrides(
     (
-      calendar-container-shape: 8px,
-      calendar-container-background-color: #ffffff,
+      calendar-container-shape: variables.$radius-md,
+      calendar-container-background-color: variables.$color-white,
     )
   );
 
   @include mat.sidenav-overrides(
     (
-      container-background-color: #ffffff,
-      content-background-color: #fafafa,
+      container-background-color: variables.$color-white,
+      content-background-color: variables.$color-surface-low,
     )
   );
 
   @include mat.table-overrides(
     (
-      background-color: #ffffff,
-      row-item-outline-color: rgba(0, 0, 0, 0.12),
+      background-color: variables.$color-white,
+      row-item-outline-color: variables.$color-on-surface-divider,
     )
   );
 
   @include mat.tooltip-overrides(
     (
       container-color: var(--mat-sys-surface-container),
-      container-shape: 8px,
+      container-shape: variables.$radius-md,
       supporting-text-color: var(--mat-sys-on-surface),
-      supporting-text-size: 0.875rem,
+      supporting-text-size: variables.$font-size-tooltip,
     )
   );
 }
@@ -189,20 +189,20 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background: #ffffff;
-  color: rgba(0, 0, 0, 0.87);
+  background: variables.$color-white;
+  color: variables.$color-on-surface-high;
 }
 
 .error-snackbar {
   .mdc-snackbar__surface {
     background-color: var(--mat-sys-error-container) !important;
-    border: 2px solid var(--mat-sys-error) !important;
-    padding: 1.5rem !important;
+    border: variables.$error-snackbar-border-width solid var(--mat-sys-error) !important;
+    padding: variables.$error-snackbar-padding !important;
   }
 
   .mdc-snackbar__label {
     color: var(--mat-sys-error) !important;
-    font-weight: 500 !important;
+    font-weight: variables.$page-title-weight !important;
   }
 
   .mat-mdc-snack-bar-action {
@@ -211,12 +211,12 @@ body {
 }
 
 .mat-mdc-form-field {
-  --mat-form-field-container-height: 2.25rem;
-  --mat-form-field-container-vertical-padding: 0.5rem;
+  --mat-form-field-container-height: #{variables.$form-field-height};
+  --mat-form-field-container-vertical-padding: #{variables.$form-field-vertical-padding};
 }
 
 .mat-mdc-form-field-subscript-wrapper {
-  min-height: 1.25rem;
+  min-height: variables.$form-field-subscript-min-height;
 }
 
 .mat-mdc-form-field-input-control {
@@ -224,17 +224,17 @@ body {
 }
 
 .password-requirements-tooltip .mdc-tooltip__surface {
-  min-width: 300px !important;
+  min-width: variables.$password-tooltip-min-width !important;
   white-space: pre-line !important;
-  padding: 12px !important;
+  padding: variables.$password-tooltip-padding !important;
   text-align: left !important;
-  translate: 0 -16px !important;
+  translate: 0 #{variables.$password-tooltip-translate-y} !important;
 }
 
 .sort-button .mdc-button__label {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: variables.$sort-button-gap;
 }
 
 .create-form .mat-mdc-form-field-focus-overlay {
@@ -258,8 +258,8 @@ body {
 }
 
 .topic-select-panel .mat-mdc-option {
-  min-height: 2em;
-  height: 2em;
+  min-height: variables.$form-field-height;
+  height: auto;
 }
 
 * {
@@ -268,8 +268,8 @@ body {
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: variables.$scrollbar-width;
+  height: variables.$scrollbar-width;
 }
 
 *::-webkit-scrollbar-track {
@@ -278,8 +278,8 @@ body {
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--mat-sys-outline-variant);
-  border-radius: 8px;
-  border: 3px solid transparent;
+  border-radius: variables.$radius-md;
+  border: variables.$scrollbar-border solid transparent;
   background-clip: content-box;
 }
 

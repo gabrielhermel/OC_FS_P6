@@ -24,20 +24,20 @@
 .button-group {
   display: flex;
   flex-direction: row;
-  gap: 60px;
+  gap: variables.$landing-button-gap-desktop;
   position: absolute;
   top: 66.66vh;
   transform: translateY(-100%);
 
   @include variables.mobile-only {
     flex-direction: column;
-    gap: 35px;
+    gap: variables.$landing-button-gap-mobile;
     top: 50vh;
     transform: translateY(-50%);
   }
 
   button {
-    min-width: 200px;
-    border-color: #000;
+    min-width: variables.$landing-button-min-width;
+    border-color: variables.$color-black;
   }
 }

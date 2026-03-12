@@ -13,10 +13,14 @@
 
 .create-header {
   display: flex;
-  gap: 1rem;
+  gap: variables.$create-header-gap;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: variables.$create-header-margin-bottom;
   position: relative;
+
+  @include variables.mobile-only {
+    margin-bottom: 0;
+  }
 }
 
 .back-button {
@@ -32,20 +36,37 @@
   }
 }
 
-.page-title {
+.page-title-desktop {
   font-size: variables.$create-title-size;
   font-weight: variables.$create-title-weight;
   margin: 0;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+
+  @include variables.mobile-only {
+    display: none;
+  }
+}
+
+.page-title-mobile {
+  display: none;
+  font-size: variables.$create-title-size;
+  font-weight: variables.$create-title-weight;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: variables.$create-title-mobile-margin-bottom;
+
+  @include variables.mobile-only {
+    display: block;
+  }
 }
 
 .create-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: variables.$create-form-gap;
 
   mat-form-field {
     width: variables.$create-form-width;
@@ -56,9 +77,9 @@
   }
 
   button[type='submit'] {
-    padding-left: 3rem;
-    padding-right: 3rem;
-    margin-top: 1.25rem;
+    padding-left: variables.$create-submit-padding-x;
+    padding-right: variables.$create-submit-padding-x;
+    margin-top: variables.$create-submit-margin-top;
 
     &:not(:disabled),
     &:disabled {
@@ -70,7 +91,7 @@
 
 .content-field {
   textarea.content-input {
-    padding: 12px 16px;
+    padding: variables.$create-textarea-padding;
     resize: vertical;
     box-sizing: border-box;
   }

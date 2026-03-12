@@ -3,8 +3,10 @@
     <button mat-icon-button class="back-button" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="page-title">Créer un nouvel article</h1>
+    <h1 class="page-title-desktop">Créer un nouvel article</h1>
   </div>
+
+  <h1 class="page-title-mobile">Créer un nouvel article</h1>
 
   <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="create-form">
     <mat-form-field appearance="outline" subscriptSizing="dynamic">

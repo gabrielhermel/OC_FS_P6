@@ -28,7 +28,7 @@
 
 %nav-btn-styles {
   color: var(--mat-sys-on-surface);
-  font-size: 1.125rem;
+  font-size: variables.$navbar-nav-btn-font-size;
   font-weight: 400;
 
   &:hover {
@@ -62,9 +62,9 @@
   margin-left: variables.$button-avatar-gap;
 
   mat-icon {
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
+    font-size: variables.$navbar-avatar-icon-size;
+    width: variables.$navbar-avatar-icon-size;
+    height: variables.$navbar-avatar-icon-size;
     color: var(--mat-sys-on-surface-variant);
   }
 
@@ -104,7 +104,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  padding: 2rem 1rem;
+  padding: variables.$container-padding-desktop variables.$container-padding-mobile;
   box-sizing: border-box;
 }
 
@@ -112,7 +112,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 1rem;
+  gap: variables.$button-gap;
 
   .logout-btn {
     @extend %logout-btn-styles;
