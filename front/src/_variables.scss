@@ -1,7 +1,7 @@
 // Breakpoints
 $breakpoint-tablet: 768px !default;
 
-// ─── Design Tokens ────────────────────────────────────────────────────────────
+// ─── Design Tokens ───
 
 // Border radii
 $radius-none: 0px !default;
@@ -44,7 +44,7 @@ $font-size-tooltip: 0.875rem !default;
 $scrollbar-width: 10px !default;
 $scrollbar-border: 3px !default;
 
-// ─── Layout ───────────────────────────────────────────────────────────────────
+// ─── Layout ───
 
 $layout-max-width: 1200px !default;
 
@@ -53,17 +53,17 @@ $container-max-width: $layout-max-width !default;
 $container-padding-desktop: 2rem !default;
 $container-padding-mobile: 1rem !default;
 
-// ─── Spacing & Gaps ───────────────────────────────────────────────────────────
+// ─── Spacing & Gaps ───
 
 $button-gap: 1rem !default;
 $button-avatar-gap: 2rem !default;
 
-// ─── Shadows & Overlays ───────────────────────────────────────────────────────
+// ─── Shadows & Overlays ───
 
 $mobile-menu-shadow: -2px 0 8px rgba(0, 0, 0, 0.15) !default;
 $mobile-backdrop-overlay: rgba(200, 200, 200, 0.5) !default;
 
-// ─── Shared Components ────────────────────────────────────────────────────────
+// ─── Shared Components ───
 
 // Icon buttons
 $icon-button-size: 54px !default;
@@ -72,6 +72,9 @@ $icon-button-icon-size: 36px !default;
 // Page elements
 $page-title-size: 1.5rem !default;
 $page-title-weight: 500 !default;
+$form-width-half: 50% !default;
+$form-narrow-gap: 0.25rem !default;
+$button-wide-padding-x: 3rem !default;
 
 // Cards
 $card-border-radius: $radius-md !default;
@@ -85,7 +88,7 @@ $loading-padding: 3rem !default;
 // Logo
 $logo-img-width: 695px !default;
 
-// ─── Navbar ───────────────────────────────────────────────────────────────────
+// ─── Navbar ───
 
 $navbar-padding-vertical: 1rem !default;
 $navbar-padding-horizontal: 2rem !default;
@@ -95,7 +98,7 @@ $navbar-mobile-menu-width: 250px !default;
 $navbar-avatar-icon-size: 40px !default;
 $navbar-nav-btn-font-size: 1.125rem !default;
 
-// ─── Auth Pages ───────────────────────────────────────────────────────────────
+// ─── Auth Pages ───
 
 $auth-card-max-width: 300px !default;
 $auth-container-min-height: 60vh !default;
@@ -111,7 +114,7 @@ $auth-back-button-mobile-top: 1rem !default;
 $auth-back-button-mobile-left: 1rem !default;
 $auth-mobile-logo-margin-top: 3rem !default;
 
-// ─── Feed Page ────────────────────────────────────────────────────────────────
+// ─── Feed Page ───
 
 $feed-max-width: $container-max-width !default;
 $feed-padding-desktop: $container-padding-desktop !default;
@@ -127,13 +130,13 @@ $sort-button-gap: 0.25rem !default;
 $sort-arrow-size: 1.5rem !default;
 $sort-arrow-offset: -0.125rem !default;
 
-// ─── Topics Page ──────────────────────────────────────────────────────────────
+// ─── Topics Page ───
 
 $topics-grid-gap-column: 1rem !default;
 $topic-subscribe-button-width: 150px !default;
 $topic-subscribe-button-disabled-color: $color-disabled-text !default;
 
-// ─── Article Detail Page ──────────────────────────────────────────────────────
+// ─── Article Detail Page ───
 
 $detail-title-size: $page-title-size !default;
 $detail-title-weight: $page-title-weight !default;
@@ -150,42 +153,65 @@ $detail-back-button-icon-size: $icon-button-icon-size !default;
 $detail-meta-row-gap: 1rem !default;
 $detail-meta-column-gap: 2rem !default;
 
-// ─── Article Create Page ──────────────────────────────────────────────────────
+// ─── Article Create Page ───
 
 $create-title-size: $page-title-size !default;
 $create-title-weight: $page-title-weight !default;
 $create-title-mobile-margin-bottom: 1.75rem !default;
 $create-back-button-size: $icon-button-size !default;
 $create-back-button-icon-size: $icon-button-icon-size !default;
-$create-form-width: 50% !default;
+$create-form-width: $form-width-half !default;
 $create-header-gap: 1rem !default;
 $create-header-margin-bottom: 2rem !default;
-$create-form-gap: 0.25rem !default;
-$create-submit-padding-x: 3rem !default;
+$create-form-gap: $form-narrow-gap !default;
+$create-submit-padding-x: $button-wide-padding-x !default;
 $create-submit-margin-top: 1.25rem !default;
 $create-textarea-padding: 12px 16px !default;
 
-// ─── Landing Page ─────────────────────────────────────────────────────────────
+// ─── Landing Page ───
 
 $landing-button-gap-desktop: 60px !default;
 $landing-button-gap-mobile: 35px !default;
 $landing-button-min-width: 200px !default;
 
-// ─── Form Fields ──────────────────────────────────────────────────────────────
+// ─── Profile Page ───
+
+$profile-form-width: $form-width-half !default;
+$profile-title-margin-bottom: 1.5rem !default;
+$profile-form-gap: $form-narrow-gap !default;
+$profile-form-margin-bottom: 1.5rem !default;
+$profile-submit-padding-x: $button-wide-padding-x !default;
+$profile-divider-border-width: 1px !default;
+$profile-divider-margin-vertical: 1.5rem !default;
+$profile-divider-margin-horizontal-desktop: $container-padding-desktop !default;
+$profile-divider-margin-mobile: 0 !default;
+$profile-subscriptions-title-margin-top: 1.5rem !default;
+$profile-subscriptions-title-margin-bottom: 1.5rem !default;
+$profile-unsubscribe-button-padding-x: $button-wide-padding-x !default;
+$profile-topic-description-line-clamp: 3 !default;
+
+// ─── Form Fields ───
 
 $form-field-height: 2.25rem !default;
 $form-field-vertical-padding: 0.5rem !default;
 $form-field-subscript-min-height: 1.25rem !default;
-$password-tooltip-min-width: 300px !default;
-$password-tooltip-padding: 12px !default;
-$password-tooltip-translate-y: -16px !default;
 
-// ─── Snackbar (error variant) ─────────────────────────────────────────────────
+// ─── Tooltips ───
 
+$register-password-tooltip-min-width: 300px !default;
+$register-password-tooltip-padding: 12px !default;
+$register-password-tooltip-translate-y: -16px !default;
+$profile-password-tooltip-padding: 12px !default;
+$profile-password-tooltip-translate-x: 14px !default;
+
+// ─── Snackbar ───
+
+$notify-snackbar-border-width: 2px !default;
+$notify-snackbar-padding: 1.5rem !default;
 $error-snackbar-border-width: 2px !default;
 $error-snackbar-padding: 1.5rem !default;
 
-// ─── Responsive Mixins ────────────────────────────────────────────────────────
+// ─── Responsive Mixins ───
 
 @mixin mobile-only {
   @media (max-width: ($breakpoint-tablet - 1px)) {

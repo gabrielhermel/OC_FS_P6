@@ -1,0 +1,145 @@
+@use 'variables';
+
+.profile-container {
+  max-width: variables.$container-max-width;
+  margin: 0 auto;
+  padding: variables.$container-padding-desktop;
+  color: var(--mat-sys-on-surface);
+
+  @include variables.mobile-only {
+    padding: variables.$container-padding-desktop variables.$container-padding-mobile;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: variables.$loading-padding;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.page-title {
+  font-size: variables.$page-title-size;
+  font-weight: variables.$page-title-weight;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: variables.$profile-title-margin-bottom;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: variables.$profile-form-gap;
+  margin-bottom: variables.$profile-form-margin-bottom;
+
+  mat-form-field {
+    width: variables.$profile-form-width;
+
+    @include variables.mobile-only {
+      width: 100%;
+    }
+  }
+
+  .submit-button {
+    padding-left: variables.$profile-submit-padding-x;
+    padding-right: variables.$profile-submit-padding-x;
+
+    &:not(:disabled),
+    &:disabled {
+      background-color: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary);
+    }
+  }
+}
+
+.divider {
+  border: none;
+  border-top: variables.$profile-divider-border-width solid variables.$color-black;
+  margin: variables.$profile-divider-margin-vertical
+    variables.$profile-divider-margin-horizontal-desktop;
+
+  @include variables.mobile-only {
+    margin: variables.$profile-divider-margin-mobile;
+  }
+}
+
+.subscriptions-title {
+  font-size: variables.$page-title-size;
+  font-weight: variables.$page-title-weight;
+  text-align: center;
+  margin-top: variables.$profile-subscriptions-title-margin-top;
+  margin-bottom: variables.$profile-subscriptions-title-margin-bottom;
+}
+
+.no-subscriptions {
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+  padding: variables.$loading-padding;
+}
+
+.subscriptions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: variables.$feed-grid-gap-row variables.$topics-grid-gap-column;
+
+  @include variables.mobile-only {
+    grid-template-columns: 1fr;
+    gap: variables.$feed-grid-gap-mobile;
+  }
+}
+
+.topic-card {
+  background-color: var(--mat-sys-surface-container);
+  padding: variables.$card-padding;
+  border-radius: variables.$card-border-radius;
+  display: flex;
+  flex-direction: column;
+}
+
+.topic-title {
+  font-weight: variables.$page-title-weight;
+  font-size: var(--mat-sys-label-large-size);
+  margin-bottom: variables.$card-content-gap;
+}
+
+.topic-description {
+  font-size: var(--mat-sys-label-large-size);
+  margin: 0 0 variables.$card-padding 0;
+  line-height: 1.5;
+  white-space: pre-line;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  flex-grow: 1;
+}
+
+.desktop-description {
+  -webkit-line-clamp: variables.$profile-topic-description-line-clamp;
+  line-clamp: variables.$profile-topic-description-line-clamp;
+
+  @include variables.mobile-only {
+    display: none;
+  }
+}
+
+.mobile-description {
+  display: none;
+  -webkit-line-clamp: variables.$profile-topic-description-line-clamp;
+  line-clamp: variables.$profile-topic-description-line-clamp;
+
+  @include variables.mobile-only {
+    display: -webkit-box;
+  }
+}
+
+.unsubscribe-button {
+  padding-left: variables.$profile-unsubscribe-button-padding-x;
+  padding-right: variables.$profile-unsubscribe-button-padding-x;
+  align-self: center;
+
+  &:not(:disabled),
+  &:disabled {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+  }
+}

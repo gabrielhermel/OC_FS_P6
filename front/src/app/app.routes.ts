@@ -9,8 +9,9 @@ import { authGuard } from './core/guards/auth-guard';
 import { MainLayout } from './core/layout/main-layout/main-layout';
 import { Login } from './features/auth/login/login';
 import { Topics } from './features/topics/list/topics';
-import { ArticleDetail} from './features/articles/detail/detail';
+import { ArticleDetail } from './features/articles/detail/detail';
 import { CreateArticle } from './features/articles/create/create';
+import { Profile } from './features/profile/profile';
 
 export const routes: Routes = [
   // Public routes (no navbar)
@@ -62,6 +63,10 @@ export const routes: Routes = [
       {
         path: 'topics',
         component: Topics,
+      },
+      {
+        path: 'profile',
+        component: Profile,
       },
     ],
   },

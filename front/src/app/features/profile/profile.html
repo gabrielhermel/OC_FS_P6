@@ -1,0 +1,84 @@
+<div class="profile-container">
+  @if (isLoadingProfile()) {
+    <div class="loading">Chargement...</div>
+  } @else {
+    <h1 class="page-title">Profil utilisateur</h1>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <input matInput formControlName="username" placeholder="Nom d'utilisateur" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <input matInput type="email" formControlName="email" placeholder="Adresse e-mail" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <input
+          matInput
+          [type]="hidePassword() ? 'password' : 'text'"
+          formControlName="password"
+          placeholder="Mot de passe"
+          [matTooltip]="passwordTooltip"
+          matTooltipPosition="above"
+          matTooltipClass="profile-password-requirements-tooltip"
+          matTooltipTouchGestures="off"
+          #tooltipRef="matTooltip"
+          [matTooltipShowDelay]="1000000"
+          [matTooltipHideDelay]="1000000"
+          (focus)="tooltipRef.show(0)"
+          (blur)="tooltipRef.hide(0)"
+          (mousedown)="$event.stopPropagation()"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword.set(!hidePassword())"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword()"
+        >
+          <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!canSubmit"
+        class="submit-button"
+      >
+        Sauvegarder
+      </button>
+    </form>
+
+    <hr class="divider" />
+
+    <h2 class="subscriptions-title">Abonnements</h2>
+
+    @if (subscriptions().length === 0) {
+      <p class="no-subscriptions">Vous n'avez aucun abonnement pour le moment.</p>
+    } @else {
+      <div class="subscriptions-grid">
+        @for (topic of subscriptions(); track topic.id) {
+          <div class="topic-card">
+            <div class="topic-title">{{ topic.name }}</div>
+            <p class="topic-description desktop-description">
+              Description: {{ topic.description }}
+            </p>
+            <p class="topic-description mobile-description">Description: {{ topic.description }}</p>
+            <button
+              mat-raised-button
+              color="primary"
+              class="unsubscribe-button"
+              (click)="onUnsubscribe(topic)"
+            >
+              Se désabonner
+            </button>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

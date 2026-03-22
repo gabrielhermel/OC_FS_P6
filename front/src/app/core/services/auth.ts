@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../../shared/models/auth';
 import { User } from '../../shared/models/user';
 import { Store } from './store';
+import { UpdateProfileRequest } from '../../shared/models/update-profile';
 
 /**
  * Authentication service handling user registration, login, logout, and token management.
@@ -46,24 +47,19 @@ export class Auth {
       return;
     }
 
-    this.fetchCurrentUser().subscribe({
-      complete: () => this._authInitialized.set(true),
-    });
-  }
-
-  /**
-   * Fetch current user profile from backend.
-   * If request fails (expired/invalid token), logout.
-   */
-  private fetchCurrentUser(): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/user/profile`).pipe(
-      take(1),
-      tap((user) => this._currentUser.set(user)),
-      catchError(() => {
-        this.logout();
-        return EMPTY;
-      }),
-    );
+    this.http
+      .get<User>(`${environment.apiUrl}/user/profile`)
+      .pipe(
+        take(1),
+        tap((user) => this._currentUser.set(user)),
+        catchError(() => {
+          this.logout();
+          return EMPTY;
+        }),
+      )
+      .subscribe({
+        complete: () => this._authInitialized.set(true),
+      });
   }
 
   /**
@@ -103,6 +99,25 @@ export class Auth {
   }
 
   /**
+   * Get current user profile with subscriptions
+   */
+  getProfile(): Observable<User> {
+    return this.http
+      .get<User>(`${environment.apiUrl}/user/profile`)
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  /**
+   * Update user profile (username, email, password)
+   */
+  updateProfile(request: UpdateProfileRequest): Observable<User> {
+    return this.http.put<User>(`${environment.apiUrl}/user/profile`, request).pipe(
+      tap((user) => this._currentUser.set(user)),
+      catchError((error) => this.handleError(error)),
+    );
+  }
+
+  /**
    * Handle successful authentication (login or register)
    */
   private handleAuthSuccess(response: AuthResponse): void {
@@ -111,17 +126,20 @@ export class Auth {
   }
 
   /**
-   * Handle HTTP errors from authentication requests
+   * Handle HTTP errors from authentication and profile requests
    */
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Une erreur est survenue';
 
     if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
       errorMessage = `Erreur: ${error.error.message}`;
     } else {
-      // Backend error
-      errorMessage = error.error?.message || errorMessage;
+      if (error.error?.errors && typeof error.error.errors === 'object') {
+        const validationErrors = Object.values(error.error.errors) as string[];
+        errorMessage = validationErrors.join('\n');
+      } else if (error.error?.message) {
+        errorMessage = error.error.message;
+      }
     }
 
     return throwError(() => new Error(errorMessage));

@@ -55,6 +55,8 @@ public final class UserConstraints {
   @Target({ElementType.FIELD, ElementType.PARAMETER})
   @Retention(RetentionPolicy.RUNTIME)
   @Email(message = "L'email doit être valide")
+  @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+      message = "L'email doit contenir un domaine valide avec un point")
   @Size(max = 255, message = "L'email ne doit pas dépasser 255 caractères")
   public @interface ValidEmail {
 

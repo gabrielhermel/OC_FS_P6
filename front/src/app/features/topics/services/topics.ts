@@ -25,4 +25,11 @@ export class TopicsService {
   subscribe(topicId: number): Observable<void> {
     return this.http.post<void>(`${this.subscriptionsUrl}/${topicId}`, {});
   }
+
+  /**
+   * Unsubscribe from a topic
+   */
+  unsubscribe(topicId: number): Observable<void> {
+    return this.http.delete<void>(`${this.subscriptionsUrl}/${topicId}`);
+  }
 }
