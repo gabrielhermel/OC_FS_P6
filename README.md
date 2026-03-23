@@ -179,6 +179,11 @@ nano .env
 | `JWT_EXPIRATION`       | JWT token validity in milliseconds       | `86400000` (24 hours)                                |
 | `CORS_ALLOWED_ORIGINS` | Frontend URL for CORS                    | `http://localhost:4200` (default Angular dev server) |
 
+**Note for WSL users:** If MySQL is installed on Windows but you will be running the backend in WSL (or vice versa), `localhost` may not work. Use the Windows host IP address instead:
+- Find your Windows IP: `ipconfig` (in Windows PowerShell) - look for "IPv4 Address" under your network adapter
+- Update `DB_URL` in `.env` to use this IP: `jdbc:mysql://<WINDOWS_IP>:3306/mdd?serverTimezone=UTC`
+- Ensure MySQL accepts connections from this IP (check `bind-address` in MySQL config)
+
 **Finding connection details:**
 
 - **MySQL URL:** Default is `jdbc:mysql://localhost:3306/<database_name>?serverTimezone=UTC`
