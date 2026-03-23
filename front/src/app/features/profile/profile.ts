@@ -145,8 +145,8 @@ export class Profile implements OnInit {
 
     // If nothing changed, show message and return
     if (!usernameChanged && !emailChanged && !passwordChanged) {
-      this.snackBar.open('Aucune modification détectée', 'Fermer', {
-        duration: 5000,
+      this.snackBar.open('Aucune modification détectée', '', {
+        duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
         panelClass: ['notify-snackbar'],
@@ -204,11 +204,11 @@ export class Profile implements OnInit {
             email: user.email,
             password: '',
           });
-          this.snackBar.open('Profil mis à jour avec succès', 'Fermer', {
-            duration: 5000,
+          this.snackBar.open('Profil mis à jour avec succès', '', {
+            duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            panelClass: ['notify-snackbar']
+            panelClass: ['notify-snackbar'],
           });
         },
         error: (error) => {

@@ -105,6 +105,12 @@ export class Register {
       .subscribe({
         next: () => {
           this.router.navigate(['/articles']);
+          this.snackBar.open('Compte créé avec succès !', '', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['notify-snackbar'],
+          });
         },
         error: (error: unknown) => {
           const message = error instanceof Error ? error.message : 'Une erreur est survenue';

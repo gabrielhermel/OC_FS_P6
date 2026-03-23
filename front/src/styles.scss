@@ -199,6 +199,8 @@ body {
     background-color: variables.$color-primary-container !important;
     border: variables.$notify-snackbar-border-width solid variables.$color-primary !important;
     padding: variables.$notify-snackbar-padding !important;
+    min-width: auto !important;
+    max-width: max-content !important;
   }
 
   .mdc-snackbar__label {
@@ -206,8 +208,13 @@ body {
     font-weight: variables.$page-title-weight !important;
   }
 
+  .mat-mdc-snack-bar-label {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   .mat-mdc-snack-bar-action {
-    color: variables.$color-inverse-surface !important;
+    display: none !important;
   }
 }
 
