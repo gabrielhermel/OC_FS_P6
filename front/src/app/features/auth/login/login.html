@@ -16,7 +16,23 @@
       <div class="form-field">
         <label for="password">Mot de passe</label>
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
-          <input matInput type="password" id="password" formControlName="password" required />
+          <input
+            matInput
+            [type]="hidePassword() ? 'password' : 'text'"
+            id="password"
+            formControlName="password"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword.set(!hidePassword())"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword()"
+          >
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
           @if (password.hasError('required') && password.touched) {
             <mat-error>Le mot de passe est requis</mat-error>
           }

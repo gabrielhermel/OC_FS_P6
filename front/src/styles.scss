@@ -246,7 +246,8 @@ body {
   white-space: pre-line !important;
   padding: variables.$register-password-tooltip-padding !important;
   text-align: left !important;
-  translate: 0 #{variables.$register-password-tooltip-translate-y} !important;
+  translate: #{variables.$register-password-tooltip-translate-x}
+    #{variables.$register-password-tooltip-translate-y} !important;
 }
 
 .profile-password-requirements-tooltip .mdc-tooltip__surface {
@@ -260,9 +261,7 @@ body {
   translate: #{variables.$profile-password-tooltip-translate-x} 0 !important;
 
   @include variables.mobile-only {
-    min-width: calc(
-      100vw - 2 * variables.$container-padding-mobile
-    ) !important;
+    min-width: calc(100vw - 2 * variables.$container-padding-mobile) !important;
   }
 }
 

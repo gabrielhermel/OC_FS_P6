@@ -42,9 +42,9 @@ export class CreateArticle implements OnInit {
   private snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
-  topics = signal<Topic[]>([]);
-  isLoadingTopics = signal(true);
-  isSubmitting = signal(false);
+  readonly topics = signal<Topic[]>([]);
+  readonly isLoadingTopics = signal(true);
+  readonly isSubmitting = signal(false);
 
   articleForm = this.fb.nonNullable.group({
     topicId: this.fb.nonNullable.control<number | null>(null, [Validators.required]),

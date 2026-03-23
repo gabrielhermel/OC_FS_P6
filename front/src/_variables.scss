@@ -82,6 +82,9 @@ $card-padding: 1rem !default;
 $card-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !default;
 $card-content-gap: 0.75rem !default;
 
+// Tooltips
+$password-tooltip-translate-x: 14px !default;
+
 // Loading state (shared across pages)
 $loading-padding: 3rem !default;
 
@@ -201,8 +204,9 @@ $form-field-subscript-min-height: 1.25rem !default;
 $register-password-tooltip-min-width: 300px !default;
 $register-password-tooltip-padding: 12px !default;
 $register-password-tooltip-translate-y: -16px !default;
+$register-password-tooltip-translate-x: $password-tooltip-translate-x !default;
 $profile-password-tooltip-padding: 12px !default;
-$profile-password-tooltip-translate-x: 14px !default;
+$profile-password-tooltip-translate-x: $password-tooltip-translate-x !default;
 
 // ─── Snackbar ───
 

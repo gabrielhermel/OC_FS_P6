@@ -22,9 +22,9 @@ export class Topics implements OnInit {
   private snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
-  topics = signal<Topic[]>([]);
-  isLoading = signal(true);
-  hasError = signal(false);
+  readonly topics = signal<Topic[]>([]);
+  readonly isLoading = signal(true);
+  readonly hasError = signal(false);
 
   /**
    * Load topics on component initialization

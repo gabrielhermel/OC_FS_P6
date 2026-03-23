@@ -42,10 +42,10 @@ export class Profile implements OnInit {
   private snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
-  subscriptions = signal<Topic[]>([]);
-  isLoadingProfile = signal(true);
-  isSubmitting = signal(false);
-  hidePassword = signal(true);
+  readonly subscriptions = signal<Topic[]>([]);
+  readonly isLoadingProfile = signal(true);
+  readonly isSubmitting = signal(false);
+  readonly hidePassword = signal(true);
 
   profileForm = this.fb.nonNullable.group({
     username: this.fb.nonNullable.control<string>(''),

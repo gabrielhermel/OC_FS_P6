@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
 import { Auth } from '../../../core/services/auth';
@@ -18,7 +19,14 @@ import { LoginRequest } from '../../../shared/models/auth';
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -31,6 +39,7 @@ export class Login {
 
   /** Prevents duplicate submissions and manages submit button disabled state */
   readonly isSubmitting = signal(false);
+  readonly hidePassword = signal(true);
 
   /** Strongly typed reactive form. */
   readonly loginForm = this.fb.nonNullable.group({

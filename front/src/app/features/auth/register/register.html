@@ -10,6 +10,11 @@
           @if (username.hasError('required') && username.touched) {
             <mat-error>Le nom d'utilisateur est requis</mat-error>
           }
+          @if (
+            (username.hasError('minlength') || username.hasError('maxlength')) && username.touched
+          ) {
+            <mat-error>Entre 1 et 50 caractères</mat-error>
+          }
         </mat-form-field>
       </div>
 
@@ -35,7 +40,7 @@
           -->
           <input
             matInput
-            type="password"
+            [type]="hidePassword() ? 'password' : 'text'"
             id="password"
             formControlName="password"
             required
@@ -50,6 +55,16 @@
             (blur)="tooltipRef.hide(0)"
             (mousedown)="$event.stopPropagation()"
           />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword.set(!hidePassword())"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword()"
+          >
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
           @if (password.hasError('required') && password.touched) {
             <mat-error>Le mot de passe est requis</mat-error>
           }

@@ -24,10 +24,10 @@ export class Feed implements OnInit {
   private snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
-  articles = signal<Article[]>([]);
-  sortOrder = signal<'asc' | 'desc'>('desc');
-  isLoading = signal(true);
-  hasError = signal(false);
+  readonly articles = signal<Article[]>([]);
+  readonly sortOrder = signal<'asc' | 'desc'>('desc');
+  readonly isLoading = signal(true);
+  readonly hasError = signal(false);
 
   /**
    * Load articles on component initialization

@@ -7,10 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
 import { Auth } from '../../../core/services/auth';
 import { RegisterRequest } from '../../../shared/models/auth';
+import { emailValidator } from '../../../shared/validators/email.validator';
 import { passwordValidator } from '../../../shared/validators/password.validator';
 
 /**
@@ -27,6 +29,7 @@ import { passwordValidator } from '../../../shared/validators/password.validator
     MatInputModule,
     MatButtonModule,
     MatTooltipModule,
+    MatIconModule,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
@@ -40,11 +43,16 @@ export class Register {
 
   /** Prevents duplicate submissions and manages submit button disabled state */
   readonly isSubmitting = signal(false);
+  readonly hidePassword = signal(true);
 
   /** Strongly typed reactive form. */
   readonly registerForm = this.fb.nonNullable.group({
-    username: this.fb.nonNullable.control<string>('', [Validators.required]),
-    email: this.fb.nonNullable.control<string>('', [Validators.required, Validators.email]),
+    username: this.fb.nonNullable.control<string>('', [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(50),
+    ]),
+    email: this.fb.nonNullable.control<string>('', [Validators.required, emailValidator()]),
     password: this.fb.nonNullable.control<string>('', [
       Validators.required,
       Validators.minLength(8),

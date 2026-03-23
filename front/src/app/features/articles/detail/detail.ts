@@ -30,10 +30,10 @@ export class ArticleDetail implements OnInit {
 
   readonly TEXTAREA_ROWS = 5;
 
-  article = signal<Article | null>(null);
-  isLoading = signal(true);
-  hasError = signal(false);
-  isSubmitting = signal(false);
+  readonly article = signal<Article | null>(null);
+  readonly isLoading = signal(true);
+  readonly hasError = signal(false);
+  readonly isSubmitting = signal(false);
 
   commentForm = this.fb.nonNullable.group({
     content: this.fb.nonNullable.control<string>('', [Validators.required]),
